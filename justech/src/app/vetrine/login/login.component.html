@@ -1,0 +1,62 @@
+<body class="hold-transition login-page">
+    <div class="login-box">
+      <div class="login-logo">   
+          <img [src] ="cheminImage" />
+      </div>
+
+     
+      <!-- /.login-logo -->
+      <div class="card">
+        <div class="card-body login-card-body">
+          <p class="login-box-msg"> Connectez-vous pour démarrer votre session</p>
+    
+     
+          <form [formGroup]="loginForm" (ngSubmit)="onlogin()">
+            <div class="input-group mb-3" data-validate = "Valid email is required: ex@abc.xyz">
+              <input type="email"   formControlName="email" class="form-control" placeholder="Email"  >
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-envelope"></span>
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-3" data-validate="Password is required">
+              <input type="password" class="form-control"  formControlName="password" autocomplete="on" placeholder="Password"   >
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-lock"></span>
+                </div>
+
+                
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-8">
+                <div class="icheck-primary">
+                  <input type="checkbox" id="remember">
+                  <label for="remember">
+                    Remember Me
+                  </label>
+                </div>
+              </div>
+              <!-- /.col -->
+              <div class="col-4">
+                <button [disabled]="loginForm.invalid"  class="btn btn-primary btn-block">
+                  <i  *ngIf="loading" class="fa fa-circle-o-notch fa-spin" style="position: relative;bottom: 1px;margin-right:5px;"></i> 
+						       login
+                </button>
+                
+              </div>
+         
+              <!-- /.col -->
+            </div>
+          </form>
+    
+          
+         
+        </div>
+        <!-- /.login-card-body -->
+      </div>
+    
+    </div>
+    <!-- /.login-box -->
