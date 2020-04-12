@@ -2,7 +2,7 @@
     <div class="wrapper">
     
       <!-- Navbar -->
-      <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+      <nav class="main-header navbar navbar-expand navbar-white navbar-light text-sm">
         <!-- Left navbar links -->
         <ul class="navbar-nav">
           <li class="nav-item">
@@ -16,7 +16,7 @@
           </li>
         </ul>
     
-        <!-- SEARCH FORM -->
+        <!-- SEARCH FORM 
         <form class="form-inline ml-3">
           <div class="input-group input-group-sm">
             <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
@@ -27,10 +27,10 @@
             </div>
           </div>
         </form>
-    
+    -->
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
-          <!-- Messages Dropdown Menu -->
+          <!-- Messages Dropdown Menu 
           <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
               <i class="far fa-comments"></i>
@@ -38,7 +38,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
               <a href="#" class="dropdown-item">
-                <!-- Message Start -->
+              
                 <div class="media">
                   <img [src] ="userImage" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                   <div class="media-body">
@@ -50,11 +50,11 @@
                     <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
                   </div>
                 </div>
-                <!-- Message End -->
+              
               </a>
               <div class="dropdown-divider"></div>
               <a href="#" class="dropdown-item">
-                <!-- Message Start -->
+              
                 <div class="media">
                   <img [src] ="userImage" alt="User Avatar" class="img-size-50 img-circle mr-3">
                   <div class="media-body">
@@ -66,11 +66,11 @@
                     <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
                   </div>
                 </div>
-                <!-- Message End -->
+             
               </a>
               <div class="dropdown-divider"></div>
               <a href="#" class="dropdown-item">
-                <!-- Message Start -->
+    
                 <div class="media">
                   <img [src] ="userImage" alt="User Avatar" class="img-size-50 img-circle mr-3">
                   <div class="media-body">
@@ -82,13 +82,13 @@
                     <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
                   </div>
                 </div>
-                <!-- Message End -->
+            
               </a>
               <div class="dropdown-divider"></div>
               <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
             </div>
           </li>
-          <!-- Notifications Dropdown Menu -->
+        
           <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
               <i class="far fa-bell"></i>
@@ -115,14 +115,14 @@
               <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
             </div>
           </li>
-
+-->
           <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" >
           
               <span  class="text-center" >Deconnecter </span>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-              <span class="dropdown-header"> {{currentUser.first_name}} </span>
+              <span class="dropdown-header"> {{currentUser.first_name|titlecase}} </span>
               <div class="dropdown-divider"></div>
            
               
@@ -158,8 +158,8 @@
               <img  [src] ="userImage" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-              <a href="#" class="d-block">{{currentUser.first_name}} &nbsp;
- {{currentUser.last_name  }}        </a>
+              <a class="d-block">{{currentUser.first_name|titlecase}} &nbsp;
+ {{currentUser.last_name|titlecase  }}        </a>
             </div>
           </div>
     
@@ -169,36 +169,51 @@
               <!-- Add icons to the links using the .nav-icon class
                    with font-awesome or any other icon font library -->
               <li class="nav-item has-treeview menu-open">
-                <a href="#" class="nav-link active">
+                <a  class="nav-link active">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>
-                    Starter Pages
+                    Organisations
                     <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="#" class="nav-link active">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Active Page</p>
+                    <a  class="nav-link " [routerLink]="['/contact/organisation/add']">
+                      <i class="far fa-circle nav-icon"  ></i>
+                      <p>Ajouter Organisation</p>
                     </a>
                   </li>
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
+                  <li class="nav-item" >
+                    <a  class="nav-link"  [routerLink]="['/contact/organisation/all']">
                       <i class="far fa-circle nav-icon"></i>
-                      <p>Inactive Page</p>
+                      <p>tous les Organisations</p>
                     </a>
                   </li>
                 </ul>
               </li>
-              <li class="nav-item">
+              <li class="nav-item has-treeview ">
                 <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-th"></i>
+                  <i class="nav-icon fas fa-edit"></i>
                   <p>
-                    Simple Link
-                    <span class="right badge badge-danger">New</span>
+                    Formations
+                    <i class="fas fa-angle-left right"></i>
                   </p>
                 </a>
+                <ul class="nav nav-treeview" style="display: none;">
+                  <li class="nav-item">
+                    <a  class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Ajouter Formation</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a  class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>tous les Formations</p>
+                    </a>
+                  </li>
+                 
+                </ul>
               </li>
             </ul>
           </nav>

@@ -81,6 +81,7 @@ export class LoginComponent implements OnInit {
                   },
         error => {
           console.log(error)
+           this.toastr.success('login correct', '');
           this.notifyService.showError("login ou mot de passe incorrect", "");
           this.loading=false;
         });

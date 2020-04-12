@@ -6,19 +6,23 @@ import { OrganisationComponent } from './organisation/organisation.component';
 import { FormationComponent } from './formation/formation.component';
 import { AllcontactComponent } from './allcontact/allcontact.component';
 import { DetailleorganisationComponent } from './detailleorganisation/detailleorganisation.component';
+import { AllorganisationComponent } from './allorganisation/allorganisation.component';
 
 const routes: Routes = [
   {path:'contact',component:LayoutComponent,
         children: [
           { path: '', redirectTo: 'home', pathMatch: 'full' },
           { path: 'home', component: AllcontactComponent },
+          {path:'formation',component:FormationComponent},
           {path:'organisation',
             children:[
              {path:'add',component:AddorganisationComponent},
+             {path:'all',component:AllorganisationComponent},
              {path:':id',component:DetailleorganisationComponent},
             ]},
-          {path:'formation',component:FormationComponent}
-        ]},   
+        ]
+      },   
+      
 ]
 
 

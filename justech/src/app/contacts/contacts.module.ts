@@ -9,12 +9,15 @@ import { LayoutComponent } from './layout/layout.component';
 import { AllcontactComponent } from './allcontact/allcontact.component';
 import { AddorganisationComponent } from './addorganisation/addorganisation.component';
 import { DetailleorganisationComponent } from './detailleorganisation/detailleorganisation.component';
-
+import { ReactiveFormsModule,FormsModule } from '@angular/forms';
+import { AllorganisationComponent } from './allorganisation/allorganisation.component';
 
 @NgModule({
-  declarations: [OrganisationComponent, FormationComponent, LayoutComponent, AllcontactComponent, AddorganisationComponent, DetailleorganisationComponent],
+  declarations: [OrganisationComponent, FormationComponent, LayoutComponent, AllcontactComponent, AddorganisationComponent, DetailleorganisationComponent, AllorganisationComponent],
   imports: [
-    CommonModule,
+    CommonModule, 
+    FormsModule, 
+    ReactiveFormsModule,
     ContactsRoutingModule
   ]
 })
