@@ -13,10 +13,11 @@ import { AllformationComponent } from './training/allformation/allformation.comp
 import { DetaillformationComponent } from './training/detaillformation/detaillformation.component';
 import { AddclientComponent } from './client/addclient/addclient.component';
 import { AllclientComponent } from './client/allclient/allclient.component';
+import { SendmailerComponent } from './sendmailer/sendmailer.component';
 
 
 @NgModule({
-  declarations: [ FormationComponent, LayoutComponent, AddorganisationComponent, DetailleorganisationComponent, AllorganisationComponent, AddformationComponent, AllformationComponent, DetaillformationComponent, AddclientComponent, AllclientComponent],
+  declarations: [ FormationComponent, LayoutComponent, AddorganisationComponent, DetailleorganisationComponent, AllorganisationComponent, AddformationComponent, AllformationComponent, DetaillformationComponent, AddclientComponent, AllclientComponent, SendmailerComponent],
   imports: [
     CommonModule, 
     FormsModule, 

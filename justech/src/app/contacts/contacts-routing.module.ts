@@ -8,12 +8,14 @@ import { AddformationComponent } from './training/addformation/addformation.comp
 import { AllformationComponent } from './training/allformation/allformation.component';
 import { AddclientComponent } from './client/addclient/addclient.component';
 import { AllclientComponent } from './client/allclient/allclient.component';
+import { SendmailerComponent } from './sendmailer/sendmailer.component';
 
 const routes: Routes = [
   {path:'contact',component:LayoutComponent,
         children: [
           { path: '', redirectTo: 'home', pathMatch: 'full' },
          /* { path: 'home', component: AllcontactComponent },*/
+         {path:'sendmailer',component:SendmailerComponent},
           {path:'formation',
           children:[
            {path:'add',component:AddformationComponent},
