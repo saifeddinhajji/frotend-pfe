@@ -61,27 +61,27 @@ export class LoginComponent implements OnInit {
          
           console.log(data)
             this.loading=false;
-            this.toastr.success('login correct', '');
+          
             if(data.role=="employeur")
             {
               this.router.navigate(['/employeur']);
-
+              this.toastr.success('login correct', 'employeur');
             }
             else if(data.role=="admin")
             {this.router.navigate(['/admin']);
-
+            this.toastr.success('login correct', 'admin');
             }
             else if(data.role=="RH")
             {
               this.router.navigate(['/contacts']);
+              this.toastr.success('login correct', 'RH');
             }
             else{
-              console.log("route not supported any url")
+              this.toastr.success('login correct', 'any');
             }
                   },
         error => {
           console.log(error)
-          
           this.notifyService.showError("login ou mot de passe incorrect", "");
           this.loading=false;
         });

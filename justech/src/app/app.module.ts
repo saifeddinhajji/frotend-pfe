@@ -7,12 +7,14 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { VetrineModule } from './vetrine/vetrine.module';
-import {ContactsModule} from './contacts/contacts.module'
+import {ContactsModule} from './contacts/contacts.module';
+
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+   
   ],
   imports: [
     BrowserModule,

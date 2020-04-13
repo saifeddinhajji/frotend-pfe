@@ -1,0 +1,127 @@
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Ajouter formation</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a  [routerLink]="['/contact/home']" >contact</a></li>
+            <li class="breadcrumb-item active">formation</li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+  
+  <section class="content">
+    <div class="container-fluid">
+<div class="card" style="padding: 30px;">
+        <form >
+
+          <div class="row">
+
+            <div class="col-md-6">
+
+              <div class="form-group">
+                <label for="inputDescription">Titre de formation :</label>
+                <input id="inputDescription" class="form-control" >
+              </div>
+              
+              <div class="form-group">
+                <label for="inputDescription">Description :</label>
+                <textarea id="inputDescription" formControlName="description"  class="form-control" rows="1"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label f>Modèle certificat :</label>
+                <input   class="form-control" >
+          
+              </div>
+
+              <div class="form-group">
+                <label for="domaine">Supports :</label>
+                <input type="text" class="form-control" id="domaine" >
+              </div>
+              <hr>
+
+              <div class="form-group">
+                <label for="inputStatus">formateur</label>
+                      <select    class=" custom-select" >
+                      <option selected disabled>selectioner un formateur</option>
+                     <option value="">formateur 1</option>
+                     <option value="">formateur 2</option>
+                     <option value="">formateur 3</option>
+                </select>
+                
+               </div>
+               
+               <div class="form-group">
+                <label for="inputStatus">organisateur</label>
+                      <select class="form-control custom-select">
+                      <option selected="" disabled="">selectioner un organisation</option>
+                      <option>organisation 1</option>
+                      <option>organisation 2</option>
+                     
+                </select>
+  
+               </div>
+
+            </div>
+
+            <div class="col-md-6">
+
+             
+              
+            
+              <div class="form-group">
+                <label for="domaine">Lieu :</label>
+                <input type="text"  class="form-control" id="domaine" >
+               
+              
+              </div>
+
+              <div class="form-group">
+                <label>Date range:</label>
+
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="far fa-calendar-alt"></i>
+                    </span>
+                  </div>
+                  <input type="text" class="form-control float-right" id="reservation">
+                </div>
+                <!-- /.input group -->
+              </div>
+
+              <div class="form-group">
+                <label for="domaine">Fax :</label>
+                <input type="text" class="form-control" id="domaine" >
+              </div>
+
+              <hr>
+              <div class="form-group">
+                <label for="domaine">pays :</label>
+                <input type="text" class="form-control" id="domaine" >
+              </div>
+             
+              <div class="form-group">
+                <label for="domaine">ville :</label>
+                <input type="text" class="form-control" id="domaine" >
+              </div>
+            </div>
+
+          </div>
+          <div class="card-footer " >
+            <button class="btn btn-primary float-right" type="submit" [disabled]="orgform.invalid">
+              <i  class="fa fa-circle-o-notch fa-spin" style="position: relative;bottom: 1px;margin-right:5px;"></i> 
+              Ajouter</button>
+          </div>
+        </form>
+
+</div>
+        
+    </div>
+  </section>
+>

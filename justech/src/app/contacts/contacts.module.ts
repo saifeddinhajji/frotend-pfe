@@ -4,16 +4,18 @@ import { CommonModule } from '@angular/common';
 import { ContactsRoutingModule } from './contacts-routing.module';
 
 import { OrganisationComponent } from './organisation/organisation.component';
-import { FormationComponent } from './formation/formation.component';
+import { FormationComponent } from './training/formation/formation.component';
 import { LayoutComponent } from './layout/layout.component';
-import { AllcontactComponent } from './allcontact/allcontact.component';
-import { AddorganisationComponent } from './addorganisation/addorganisation.component';
-import { DetailleorganisationComponent } from './detailleorganisation/detailleorganisation.component';
+import { AddorganisationComponent } from './organization/addorganisation/addorganisation.component';
+import { DetailleorganisationComponent } from './organization/detailleorganisation/detailleorganisation.component';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
-import { AllorganisationComponent } from './allorganisation/allorganisation.component';
+import { AllorganisationComponent } from './organization/allorganisation/allorganisation.component';
+import { AddformationComponent } from './training/addformation/addformation.component';
+import { AllformationComponent } from './training/allformation/allformation.component';
+import { DetaillformationComponent } from './training/detaillformation/detaillformation.component';
 
 @NgModule({
-  declarations: [OrganisationComponent, FormationComponent, LayoutComponent, AllcontactComponent, AddorganisationComponent, DetailleorganisationComponent, AllorganisationComponent],
+  declarations: [OrganisationComponent, FormationComponent, LayoutComponent, AddorganisationComponent, DetailleorganisationComponent, AllorganisationComponent, AddformationComponent, AllformationComponent, DetaillformationComponent],
   imports: [
     CommonModule, 
     FormsModule, 

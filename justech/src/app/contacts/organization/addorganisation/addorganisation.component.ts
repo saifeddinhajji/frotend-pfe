@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { NotificationService } from './../../services/notification.service';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-addorganisation',

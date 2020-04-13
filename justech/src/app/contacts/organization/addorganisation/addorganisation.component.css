@@ -1,0 +1,15 @@
+@import "./../../../../assets/fonts/font-awesome-4.7.0/css/font-awesome.css";
+ input.ng-pristine {
+    border-color:black;
+}
+
+input.ng-touched.ng-invalid {
+    border-color:red;
+}
+
+input.ng-touched.ng-valid {
+    border-color:green;
+}
+.error {
+color:red
+}

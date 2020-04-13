@@ -1,19 +1,26 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AddorganisationComponent } from './addorganisation/addorganisation.component';
+import { AddorganisationComponent } from './organization/addorganisation/addorganisation.component';
 import { LayoutComponent } from './layout/layout.component';
 import { OrganisationComponent } from './organisation/organisation.component';
-import { FormationComponent } from './formation/formation.component';
-import { AllcontactComponent } from './allcontact/allcontact.component';
-import { DetailleorganisationComponent } from './detailleorganisation/detailleorganisation.component';
-import { AllorganisationComponent } from './allorganisation/allorganisation.component';
+import { FormationComponent } from './training/formation/formation.component';
+
+import { DetailleorganisationComponent } from './organization/detailleorganisation/detailleorganisation.component';
+import { AllorganisationComponent } from './organization/allorganisation/allorganisation.component';
+import { AddformationComponent } from './training/addformation/addformation.component';
+import { AllformationComponent } from './training/allformation/allformation.component';
 
 const routes: Routes = [
   {path:'contact',component:LayoutComponent,
         children: [
           { path: '', redirectTo: 'home', pathMatch: 'full' },
-          { path: 'home', component: AllcontactComponent },
-          {path:'formation',component:FormationComponent},
+         /* { path: 'home', component: AllcontactComponent },*/
+          {path:'formation',
+          children:[
+           {path:'add',component:AddformationComponent},
+           {path:'all',component:AllformationComponent},
+           {path:':id',component:DetailleorganisationComponent},
+          ]},
           {path:'organisation',
             children:[
              {path:'add',component:AddorganisationComponent},
