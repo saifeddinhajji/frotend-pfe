@@ -179,13 +179,13 @@
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
                     <a  class="nav-link " [routerLink]="['/contact/organisation/add']">
-                      <i class="far fa-circle nav-icon"  ></i>
+                      &nbsp;  <i class="fas fa-plus nav-icon"></i>
                       <p>Ajouter Organisation</p>
                     </a>
                   </li>
                   <li class="nav-item" >
                     <a  class="nav-link"  [routerLink]="['/contact/organisation/all']">
-                      <i class="far fa-circle nav-icon"></i>
+                      &nbsp;<i class="fas fa-stream nav-icon"></i>
                       <p>tous les Organisations</p>
                     </a>
                   </li>
@@ -202,19 +202,47 @@
                 <ul class="nav nav-treeview" style="display: none;">
                   <li class="nav-item">
                     <a  class="nav-link" [routerLink]="['/contact/formation/add']">
-                      <i class="far fa-circle nav-icon"></i>
+                      &nbsp;  <i class="fas fa-plus nav-icon"></i>
                       <p>Ajouter Formation</p>
                     </a>
                   </li>
                   <li class="nav-item">
                     <a  class="nav-link" [routerLink]="['/contact/formation/all']">
-                      <i class="far fa-circle nav-icon"></i>
+                      &nbsp;<i class="fas fa-stream nav-icon"></i>
                       <p>tous les Formations</p>
                     </a>
                   </li>
                  
                 </ul>
               </li>
+
+               <li class="nav-item has-treeview ">
+                <a href="#" class="nav-link">
+                  <i class="fas fa-users-cog"></i>
+                  &nbsp;
+                  <p>
+                    clients
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview" style="display: none;">
+                  <li class="nav-item">
+                    <a  class="nav-link" [routerLink]="['/contact/client/add']">
+                      &nbsp;  <i class="fas fa-plus nav-icon"></i>
+                       <p>Ajouter client</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a  class="nav-link" [routerLink]="['/contact/client/all']">
+                      &nbsp;<i class="fas fa-stream nav-icon"></i>
+                      <p>tous les clients</p>
+                    </a>
+                  </li>
+                 
+                </ul>
+                
+              </li>
+              
             </ul>
           </nav>
           <!-- /.sidebar-menu -->

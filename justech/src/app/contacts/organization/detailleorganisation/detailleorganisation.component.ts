@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./detailleorganisation.component.css']
 })
 export class DetailleorganisationComponent implements OnInit {
-
-  constructor() { }
+  isHidden: boolean = false;
+    constructor() { }
 
   ngOnInit(): void {
   }
-
+socialshow(){
+  this.isHidden=true;
+}
+close(){
+  this.isHidden=false;
+}
 }

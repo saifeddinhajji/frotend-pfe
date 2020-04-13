@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ContactsRoutingModule } from './contacts-routing.module';
-
-import { OrganisationComponent } from './organisation/organisation.component';
 import { FormationComponent } from './training/formation/formation.component';
 import { LayoutComponent } from './layout/layout.component';
 import { AddorganisationComponent } from './organization/addorganisation/addorganisation.component';
@@ -13,9 +11,12 @@ import { AllorganisationComponent } from './organization/allorganisation/allorga
 import { AddformationComponent } from './training/addformation/addformation.component';
 import { AllformationComponent } from './training/allformation/allformation.component';
 import { DetaillformationComponent } from './training/detaillformation/detaillformation.component';
+import { AddclientComponent } from './client/addclient/addclient.component';
+import { AllclientComponent } from './client/allclient/allclient.component';
+
 
 @NgModule({
-  declarations: [OrganisationComponent, FormationComponent, LayoutComponent, AddorganisationComponent, DetailleorganisationComponent, AllorganisationComponent, AddformationComponent, AllformationComponent, DetaillformationComponent],
+  declarations: [ FormationComponent, LayoutComponent, AddorganisationComponent, DetailleorganisationComponent, AllorganisationComponent, AddformationComponent, AllformationComponent, DetaillformationComponent, AddclientComponent, AllclientComponent],
   imports: [
     CommonModule, 
     FormsModule, 

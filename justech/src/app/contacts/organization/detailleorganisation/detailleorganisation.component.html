@@ -90,7 +90,7 @@
           </div>
           <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
             
-           
+            <button type="button" class="btn btn-primary btn-sm float-right" (click)="socialshow()">Ajouter Social Media</button>
 
             <h5 class="mt-5 text-muted">formations</h5>
             <ul class="list-unstyled">
@@ -121,5 +121,44 @@
       <!-- /.card-body -->
     </div>
     <!-- /.card -->
-
   </section>
+  <section *ngIf="isHidden">
+   
+  
+    <div  class="card" style="padding-top: 15px; ">
+      <div class="text-right">
+      <button type="button" class="close" (click)="close()"aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+      <form class="form-inline">
+        
+          <div class="form-group mx-sm-3 mb-3">
+            <div class="input-group-addon">
+              <i class="fab fa-facebook-f"  style="color:cornflowerblue; font-size: large;"></i>
+              &nbsp;
+            </div>
+            <input type="text" class="form-control"  placeholder="Url Facebook">
+          </div>
+          <div class="form-group mx-sm-3 mb-3">
+            <div class="input-group-addon">
+              <i class="fab fa-linkedin-in" style="color:blue; font-size: large;"></i>
+              &nbsp;
+            </div>
+            <input type="text" class="form-control"  placeholder="Url Linkedin">
+          </div>
+          <div class="form-group mx-sm-3 mb-3">
+            <div class="input-group-addon">
+              <i class="fab fa-instagram-square"  style="color:red; font-size: large;"></i>
+              &nbsp;
+            </div>
+            <input type="text" class="form-control"  placeholder="Url Insatgram">
+          </div>
+          <div class="form-group mx-sm-3 mb-3">
+          <button  type="submit" class="btn btn-primary mb-2" style="margin-top: 5px;">Ajouter</button>
+        </div>
+  </form>
+   </div>
+      </section>
+
+    

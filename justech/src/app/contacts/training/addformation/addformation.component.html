@@ -82,23 +82,19 @@
               </div>
 
               <div class="form-group">
-                <label>Date range:</label>
-
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">
-                      <i class="far fa-calendar-alt"></i>
-                    </span>
-                  </div>
-                  <input type="text" class="form-control float-right" id="reservation">
-                </div>
-                <!-- /.input group -->
+               <label >
+                date  depart 
+               </label>
+               <input type="date"  class="form-control" id="domaine" >
               </div>
-
               <div class="form-group">
-                <label for="domaine">Fax :</label>
-                <input type="text" class="form-control" id="domaine" >
-              </div>
+                <label >
+                 date  fin 
+                </label>
+                <input type="date"  class="form-control" id="domaine" >
+               </div>
+
+              
 
               <hr>
               <div class="form-group">
@@ -114,7 +110,7 @@
 
           </div>
           <div class="card-footer " >
-            <button class="btn btn-primary float-right" type="submit" [disabled]="orgform.invalid">
+            <button class="btn btn-primary float-right" type="submit" >
               <i  class="fa fa-circle-o-notch fa-spin" style="position: relative;bottom: 1px;margin-right:5px;"></i> 
               Ajouter</button>
           </div>
@@ -124,4 +120,3 @@
         
     </div>
   </section>
->
