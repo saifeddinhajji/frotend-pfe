@@ -30,7 +30,7 @@
       </div>
     <!-- /.card-header -->
     <div class="card-body">
-      <table class="table table-bordered">
+      <table *ngIf="!loading" class="table table-bordered">
         <thead>                  
           <tr>
             <th style="width: 10px">#</th>
@@ -43,18 +43,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr *ngFor="let doc of all_organisation.docs | paginate: { itemsPerPage: all_organisation.limit, currentPage: all_organisation.page,totalItems:all_organisation.total};index as i; ">
             <td>1.</td>
-            <td>Update software</td>
-            <td>Update software</td>
-            <td>Update software</td>
-            <td>Update software</td>
-            <td>Update software</td>
+            <td>{{doc.name}}</td>
+            <td>{{doc.email}}</td>
+            <td>{{doc.tel1}}</td>
+            <td>{{doc.fax}}</td>
+            <td>{{doc.type}}</td>
 
             <td>
                 <div style="display: inline-flex; font-size: large; padding: 5px 5px;"> 
                     <i class="fas fa-edit" style="color: blue;"></i>  &nbsp;
-                    <i class="fas fa-envelope"></i> &nbsp;
+                  <a [routerLink]="['/contact/sendmailer']">  <i class="fas fa-envelope" ></i> </a>&nbsp;
                     <i class="fas fa-trash-alt" style="color: red;"></i>
                     &nbsp;
                     <a [routerLink]="['/contact/organisation/detaill']"><i class="fab fa-accusoft" style="color:seagreen;"></i></a>
@@ -66,20 +66,19 @@
    
           
         </tbody>
+        
       </table>
     </div>
+   <div class="row">
+    <pagination-controls (pageChange)="pageChange($event)" ></pagination-controls>
+   </div>
     <!-- /.card-body -->
     <div class="card-footer clearfix">
-      <ul class="pagination pagination-sm m-0 float-right">
-        <li class="page-item"><a class="page-link" href="#">«</a></li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">»</a></li>
+      
         <div class="btn-group btn-group-sm">
           <a href="#" class="btn btn-info"><i class="fas fa-eye"></i></a>
           <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
         </div>
-      </ul>
+      
     </div>
   </div>

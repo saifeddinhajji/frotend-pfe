@@ -14,7 +14,7 @@ import { DetaillformationComponent } from './training/detaillformation/detaillfo
 import { AddclientComponent } from './client/addclient/addclient.component';
 import { AllclientComponent } from './client/allclient/allclient.component';
 import { SendmailerComponent } from './sendmailer/sendmailer.component';
-
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   declarations: [ FormationComponent, LayoutComponent, AddorganisationComponent, DetailleorganisationComponent, AllorganisationComponent, AddformationComponent, AllformationComponent, DetaillformationComponent, AddclientComponent, AllclientComponent, SendmailerComponent],
@@ -22,7 +22,8 @@ import { SendmailerComponent } from './sendmailer/sendmailer.component';
     CommonModule, 
     FormsModule, 
     ReactiveFormsModule,
-    ContactsRoutingModule
+    ContactsRoutingModule,
+    NgxPaginationModule
   ]
 })
 export class ContactsModule { }

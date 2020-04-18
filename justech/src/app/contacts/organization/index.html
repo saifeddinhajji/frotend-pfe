@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+        </div>
+        <div class="card-body" style="padding-top: 12px;">
+          <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4"><div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row"><div class="col-sm-12">
+            <table *ngIf="!loading" id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+            <thead>
+            <tr role="row">
+                <th >Nom et prénom</th>
+                <th>Téléphone Résidence/Cellulaire</th>
+                <th >Téléphone Bureau/Autre</th>   
+                <th >Date création patient</th>  
+                <th >Revenu Total Genere</th>  
+                <th >Revenu Hier Genere</th>    
+                <th >Revenu Dernier Mois Genere</th>    
+            </tr>
+            </thead>
+            <tbody> 
+              <tr role="row" class="odd" *ngFor="let doc of all_patient.docs | paginate: { itemsPerPage: all_patient.limit, currentPage:all_patient.page,totalItems:all_patient.total};index as i;">
+                <td><p> {{doc.firstNamePatient}}</p></td>
+                <td><p>{{doc.telres}}</p> <p>{{doc.cellulaire}}</p></td>
+                <td><p>{{doc.telbur}}</p> <p>{{doc.telAutre}}</p></td>
+                <td><p> {{custom_date(doc.dateCreationPat)}}</p></td>
+                <td><p> {{doc.revenuTotalGenere}}</p></td>
+                <td><p> {{doc.revenuHierGenere}}</p></td>
+                <td><p> {{doc.revenuDernierMoisGenere}}</p></td>
+              </tr>
+            </tbody>
+          </table>
+          <app-loading-calls  *ngIf="loading"></app-loading-calls>
+        </div></div>
+        <div  *ngIf="!loading" class="row">
+            <pagination-controls (pageChange)="pageChange($event)" ></pagination-controls>
+        </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>

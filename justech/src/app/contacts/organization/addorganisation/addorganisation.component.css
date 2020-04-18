@@ -1,8 +1,8 @@
 @import "./../../../../assets/fonts/font-awesome-4.7.0/css/font-awesome.css";
- input.ng-pristine {
+ /*input.ng-pristine {
     border-color:black;
 }
-
+*/
 input.ng-touched.ng-invalid {
     border-color:red;
 }

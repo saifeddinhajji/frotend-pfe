@@ -30,26 +30,28 @@
       </div>
     <!-- /.card-header -->
     <div class="card-body">
-      <table class="table table-bordered">
+      <table  *ngIf="!loading" class="table table-bordered">
         <thead>                  
-          <tr>
+          <tr >
             <th style="width: 10px">#</th>
-            <th>name</th>
-            <th>type</th>
-            <th>telp</th>
-            <th>email</th>
-            <th>Progress</th>
+            <th>titre</th>
+            <th>description</th>
+            <th>pays</th>
+            <th>ville</th>
+            <th>date depart</th>
+            <th>date fin</th>
             <th style="width: 40px"> &nbsp; &nbsp; &nbsp;</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr  *ngFor="let doc of all_formation.docs | paginate: { itemsPerPage: all_formation.limit, currentPage: all_formation.page,totalItems:all_formation.total};index as i; ">
             <td>1.</td>
-            <td>Update software</td>
-            <td>Update software</td>
-            <td>Update software</td>
-            <td>Update software</td>
-            <td>Update software</td>
+            <td>{{doc.titre}}</td>
+            <td>{{doc.description}}</td>
+            <td>{{doc.pays}}</td>
+            <td>{{doc.viile}}</td>
+            <td>{{doc.date_depart}}</td>
+            <td>{{doc.date_fin}}</td>
 
             <td>
                 <div style="display: inline-flex; font-size: large; padding: 5px 5px;"> 
@@ -69,13 +71,7 @@
       </table>
     </div>
     <!-- /.card-body -->
-    <div class="card-footer clearfix">
-      <ul class="pagination pagination-sm m-0 float-right">
-        <li class="page-item"><a class="page-link" href="#">«</a></li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">»</a></li>
-      </ul>
-    </div>
+    <div class="row">
+      <pagination-controls (pageChange)="pageChange($event)" ></pagination-controls>
+     </div>
   </div>

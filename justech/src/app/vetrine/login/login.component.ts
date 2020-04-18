@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit {
             }
             else if(data.role=="RH")
             {
-              this.router.navigate(['/contacts']);
+              this.router.navigate(['/contact/organisation/add']);
               this.toastr.success('login correct', 'RH');
             }
             else{
