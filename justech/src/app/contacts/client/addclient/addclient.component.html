@@ -1,1 +1,134 @@
-<p>addclient works!</p>
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Ajouter un Client</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a  [routerLink]="['/contact/home']" >contact</a></li>
+            <li class="breadcrumb-item active">ajouter client</li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <section class="content">
+    <div class="container-fluid">
+<div class="card" style="padding: 30px;">
+        <form  [formGroup]="contactform" (ngSubmit)="saveclient()">
+
+          <div class="row">
+
+            <div class="col-md-6">
+
+              <div class="form-group">
+                <label >Nom de client :</label>
+                <input   class="form-control" formControlName="first_name" >
+              </div>
+             
+              <div class="form-group">
+                <label > Prénom   :</label>
+                <input    class="form-control" formControlName="last_name">
+              </div>
+
+
+              <div class="form-group">
+                <label for="inputStatus">sexe</label>
+                      <select   formControlName="sexe"   class="form-control custom-select" >
+                      <option value="selectioner un type d'organisation">selectioner un type d'organisation</option>
+                      <option value="homme">Homme</option> 
+                      <option value="femme"> Femme</option>     
+                </select>
+                
+               </div>
+              
+              <hr>
+              <div class="form-group">
+                <label >Telp :</label>
+                <input type="number" formControlName="tel" class="form-control"  placeholder="Enter email">
+              </div>
+              <div class="form-group">
+                <label >Email :</label>
+                <input type="email" formControlName="email" class="form-control"  placeholder="Enter email">
+              </div>
+              
+              
+               
+               
+              
+
+            <!-- 
+              -->
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <label for="inputStatus">niveau</label>
+                          <select    formControlName="niveau"  class="form-control custom-select" >
+                          <option value="selectioner un type d'organisation">selectioner un niveau</option>
+                          <option value="homme">Bac+3</option> 
+                          <option value="femme"> Bac+5</option> 
+                          <option value="femme"> Bac+9</option>     
+                          </select>
+                    
+                   </div>
+                   <div class="form-group">
+                    <label for="inputStatus">profession</label>
+                          <select    formControlName="profession"  class="form-control custom-select" >
+                          <option value="selectioner un type d'organisation">selectioner un domaine</option>
+                          <option value="homme">profession 1</option> 
+                          <option value="femme"> profession 2</option>     
+                    </select>
+                    
+                   </div>
+                   <div class="form-group">
+                    <label for="inputStatus">type</label>
+                    <select    formControlName="type"  class="form-control custom-select" >
+                          <option value="selectioner un type d'organisation">selectioner un type de contact</option>
+                          <option value="client">client</option> 
+                          <option value="formateur"> formateur</option>     
+                    </select>
+                    
+                   </div>
+                   <hr>
+                   <div class="form-group">
+                    <label >biograhie :</label>
+                    <input type="text"  formControlName="biograhie" class="form-control"  placeholder="Enter email">
+                  </div>
+              
+              <div class="form-group">
+                <label >photo</label>
+                <div class="input-group">
+                  <div class="custom-file">
+                    <input type="file"  class="custom-file-input"  (change)="selectImage($event.target.files)" >
+                    <label class="custom-file-label"  >Choose file</label>
+                  </div>
+                  <div class="input-group-append">
+                    <span class="input-group-text"   (click)="sendfiletoserveur()" >Upload</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+           
+          
+          </div>
+          <div class="card-footer " >
+            <button  class="btn btn-danger float-right" type="reset">  Annuler</button>
+             <button type="submit" class="btn btn-primary float-right" style="margin: 2px;" [disabled]="contactform.invalid" type="submit">
+              <i *ngIf="loading" class="fa fa-circle-o-notch fa-spin" style="position: relative;bottom: 1px;margin-right:5px;"></i> 
+              Ajouter</button>
+              
+          </div>
+        </form>
+        <p>Form value: {{ contactform.value | json }}</p>
+        <p>Form status: {{ contactform.status | json }}</p>
+</div>
+        
+    </div>
+    
+  </section>
+ 

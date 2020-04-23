@@ -41,6 +41,7 @@ page:number;
       console.log(this.all_organisation);
       this.loading=false;
     })
+    
   }
   pageChange(newPage:number){
 this.router.navigate(['/contact/organisation/all'],{queryParams : {page:newPage}});

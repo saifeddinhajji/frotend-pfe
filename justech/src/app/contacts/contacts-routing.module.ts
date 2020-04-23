@@ -9,12 +9,14 @@ import { AllformationComponent } from './training/allformation/allformation.comp
 import { AddclientComponent } from './client/addclient/addclient.component';
 import { AllclientComponent } from './client/allclient/allclient.component';
 import { SendmailerComponent } from './sendmailer/sendmailer.component';
+import { LoadingDataComponent } from './loading/loading-data/loading-data.component';
+
 
 const routes: Routes = [
   {path:'contact',component:LayoutComponent,
         children: [
           { path: '', redirectTo: 'home', pathMatch: 'full' },
-         /* { path: 'home', component: AllcontactComponent },*/
+         { path: 'loader', component:LoadingDataComponent },
          {path:'sendmailer',component:SendmailerComponent},
           {path:'formation',
           children:[

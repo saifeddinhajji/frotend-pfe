@@ -11,10 +11,12 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ErrorInterceptor } from './helpers/error.interceptor';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { DefaultimagePipe } from './pipe/defaultimage.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
+    DefaultimagePipe,
    
   ],
   imports: [

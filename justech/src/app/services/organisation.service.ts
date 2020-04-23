@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, first } from 'rxjs/operators';
+import {Organisation} from './../models/organisation';
+import {Formation} from './../models/Formation';
 @Injectable({
   providedIn: 'root'
 })
 export class OrganisationService {
+  organisation:Organisation;
+ 
   org:any;
   readonly  basUrl='http://localhost:5000/organisation';
+  readonly basUrlFile='http://localhost:5000';
   constructor(private http: HttpClient) { }
   add(data:any) {
     return this.http.post<any>(this.basUrl+`/add`, data)
@@ -23,7 +28,46 @@ export class OrganisationService {
   all(page:number) {
     return this.http.get(this.basUrl+`/all?page=${page}`);
   }
+
+
+    detaille(id:any):Observable<Organisation>
+    {
+      return  this.http.get<Organisation>(this.basUrl+`/find/formation/`+id).pipe(
+        map(response =>{
+          //console.log(response)
+          const organisation=new Organisation(response);
+          return organisation;
+        })
+      )
+          }
+    
+ /* upload(fromdata:any){
+    return this.http.post<String>(this.basUrlFile+`/upload/image`,fromdata, {  
+      reportProgress: true,  
+      observe: 'events'  
+    });
+  }*/
+  postFile(uploadfile: File): Observable<String> {
+    
+    const formData: FormData = new FormData();
+    formData.append('profile', uploadfile, uploadfile.name);
+    return this.http.post<String>(this.basUrlFile+`/upload/image`, formData).pipe(
+      map((res) => { return res; })
+     );
 }
+SocialMedia(_id:String,formsocial:any){
+  return this.http.post<any>(this.basUrl+`/socialmedia/`+_id, formsocial)
+  .pipe(map(socialmedia => {
+      
+     console.log(socialmedia)
+
+      
+  }));
+}
+    
+}
+
+ 
 
 /*import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
@@ -40,7 +84,5 @@ export class Patient {
       this.basUrl='https://api-ultimate-traking.virussantecommunication.ca/patient';
     }
   }
-  all(page:number) {
-    return this.http.get(this.basUrl+`/all?page=${page}`);
-  }
+  
 }*/

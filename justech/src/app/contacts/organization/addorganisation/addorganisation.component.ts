@@ -4,6 +4,7 @@ import { NotificationService } from '../../../services/notification.service';
 import { HttpClient } from '@angular/common/http';
 import { first } from 'rxjs/operators';
 import {OrganisationService} from './../../../services/organisation.service';
+import { elementClosest } from '@fullcalendar/core';
 @Component({
   selector: 'app-addorganisation',
   templateUrl: './addorganisation.component.html',
@@ -13,11 +14,9 @@ export class AddorganisationComponent implements OnInit {
   loading = false;
   submitted = false;
   orgform:FormGroup;
-  uploadedFiles: Array <File> ;
-  filename:String;
-  images:any;
-
-
+  formData:FormData;
+  uploadfile: File = null;
+   URLFile:String;
   // City Names
   Type: any = ['client', 'fournisseur', 'partenaire']
 Domaine:any=["Les établissements universitaires publics, privé,","Les écoles primaires et secondaires","Les centres","Les labos de recherche","Les hôpitaux"," Les hôtels","Les maisons d’édition","Les agrégateurs"];
@@ -31,13 +30,14 @@ Domaine:any=["Les établissements universitaires publics, privé,","Les écoles 
       email:new FormControl('example@example.com'),
       type:new FormControl(''),
       domaine:new FormControl(''),
+      logo:new FormControl(''),
       tel1:new FormControl(''),
       tel2:new FormControl(''),
       fax:new FormControl(''),
       pays:new FormControl(''),
       ville:new FormControl(''),
     });
-
+   
     
   }
 
@@ -63,42 +63,29 @@ Domaine:any=["Les établissements universitaires publics, privé,","Les écoles 
     );
         
 
-   /*console.warn(this.orgform.value);
-   console.warn(this.orgform.controls['email'].value)
-   console.warn(this.orgform.get('email').value)
-   this.notifyService.showSuccess("mergil","");
-   this.notifyService.showError("login ou mot de passe incorrect", "");
-   this.notifyService.showWarning("saif","saif");
-   this.notifyService.showInfo("saif","saif");*/
-  }
-  selectImage(event){
-   if(event.target.files>0)
-   {
-     const file=event.target.files[0];
-     this.images=file;
-   }
-  }
-  onupload(){
 
-   var colors = ["Blue", "Red", "Orange", "Green"];
-    
-// Vérifie si la valeur existe dans le tableau
-if(colors.indexOf("Green") !== -1){
-       alert("La valeur existe!")
-} else{
-       alert("La valeur n'existe pas!")
-}
-localStorage.setItem('testObject', JSON.stringify(colors));
-    /*let formData = new FormData();
-    formData.append('profile',this.images);
-    this.http.post<any>('http://localhost:5000/upload/image',formData).subscribe(
-      (data)=>console.log(data),
-      (err)=>console.log(err),
-    );*/
   }
+ 
+  selectImage(file: FileList) {
+    this.uploadfile = file.item(0);
+    
+}
+sendfiletoserveur() {
+  this.organisationService.postFile(this.uploadfile).subscribe(resultat => {
+    this.URLFile=resultat;
+   this.logo(this.URLFile)
+    }, erreur => {
+      console.log("Erreur lors de l'envoi du fichier : ", erreur);
+    });
+}
+
+
   get type() {
     return this.orgform.get('name');
   }
+ logo(value:String){
+this.orgform.controls['logo'].setValue(value);
+}
   // Choose type  using select dropdown
   changetype(e) {
     this.orgform.controls['type'].setValue(e.target.value, {
@@ -132,22 +119,3 @@ localStorage.setItem('testObject', JSON.stringify(colors));
 
 
 
-
-
-/*
-
-  fileChange(element) {
-    this.uploadedFiles = element.target.files;
-this.filename=this.uploadedFiles[1].name
-console.log(this.filename);
- }
- upload() {
-  let formData = new FormData();
-  for (var i = 0; i < this.uploadedFiles.length; i++) {
-      formData.append("profile[]", this.uploadedFiles[i], this.uploadedFiles[i].name);
-  }
-  this.http.post('http://localhost:5000/upload/image', formData)
-      .subscribe((response) => {
-          console.log('response received is ', response);
-      })
-}*/

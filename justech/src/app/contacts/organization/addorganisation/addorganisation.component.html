@@ -115,11 +115,11 @@
                 <label >Logo</label>
                 <div class="input-group">
                   <div class="custom-file">
-                    <input type="file"  class="custom-file-input" >
+                    <input type="file"  class="custom-file-input"   (change)="selectImage($event.target.files)">
                     <label class="custom-file-label"  >Choose file</label>
                   </div>
                   <div class="input-group-append">
-                    <span class="input-group-text"   >Upload</span>
+                    <span class="input-group-text"  (click)="sendfiletoserveur()" >Upload</span>
                   </div>
                 </div>
               </div>
@@ -139,7 +139,6 @@
         <p>Form value: {{ orgform.value | json }}</p>
         <p>Form status: {{ orgform.status | json }}</p>
     </div>
-    <input type="file" multiple name="image" (change)="selectImage($event)">
-    <button type="submit" (click)="onupload()">upload</button>
+    
   </section>
  

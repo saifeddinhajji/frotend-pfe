@@ -1,13 +1,14 @@
+<div *ngIf=loading_data>
 <section class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Detail FSM</h1>
+          <h1 >Detail   {{organisation.name|titlecase}}({{organisation.abreviation |uppercase }}) </h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a [routerLink]="['/contact/home']" >contact</a></li>
-            <li class="breadcrumb-item active">Detail fsm</li>
+            <li class="breadcrumb-item active">Detail Organisation</li>
           </ol>
         </div>
       </div>
@@ -16,12 +17,12 @@
 
 
 
-  <section class="content">
+  <section class="content" >
 
     <!-- Default box -->
     <div class="card collapsed-card">
       <div class="card-header">
-        <h3 class="card-title"> FSM</h3>
+        <h3 class="card-title"> </h3>
 
         <div class="card-tools">
           <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -37,15 +38,15 @@
               <div class="col-12 col-sm-4">
                 <div class="info-box bg-light">
                   <div class="info-box-content">
-                    <span class="info-box-text text-center text-muted">Estimated budget</span>
-                    <span class="info-box-number text-center text-muted mb-0">2300</span>
+                    <span class="info-box-text text-center text-muted">Nombre De Formation</span>
+                    <span class="info-box-number text-center text-muted mb-0">{{organisation.formations.length}}</span>
                   </div>
                 </div>
               </div>
               <div class="col-12 col-sm-4">
                 <div class="info-box bg-light">
                   <div class="info-box-content">
-                    <span class="info-box-text text-center text-muted">Total amount spent</span>
+                    <span class="info-box-text text-center text-muted">Nombre de client</span>
                     <span class="info-box-number text-center text-muted mb-0">2000</span>
                   </div>
                 </div>
@@ -64,22 +65,28 @@
                 <h4>Recent Activity</h4>
                   <div class="post">
                     <div class="user-block">
-                      <img class="img-circle img-bordered-sm" src="assets/dist/img/user1-128x128.jpg" alt="user image">
+                      <img class="img-circle img-bordered-sm" src={{organisation.logo}} alt="user image">
                       <span class="username">
-                        <a href="#">Jonathan Burke Jr.</a>
+                        <a href="#">{{organisation.name}}</a>
                       </span>
-                      <span class="description">Shared publicly - 7:45 PM today</span>
+                      <span class="description">{{organisation.created_at|date: 'MM/dd/yyyy'}}</span>
                     </div>
                     <!-- /.user-block -->
-                    <p>
-                      Lorem ipsum represents a long-held tradition for designers,
-                      typographers and the like. Some people hate it and argue for
-                      its demise, but others ignore.
+                    <p class="text-justify">
+                      {{organisation.description}}
                     </p>
 
                     <p>
-                      <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 1 v2</a>
+                      <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i>plus de détails</a>
                     </p>
+                    <div  *ngIf="organisation.socialmedia">
+                      <a href="{{organisation.socialmedia['facebook']}}"> <i class="fab fa-facebook-f"  style="color:cornflowerblue; font-size: large;"></i>&nbsp;facebook</a>&nbsp;
+                      <a  href="{{organisation.socialmedia['linkedin']}}">  <i class="fab fa-linkedin-in" style="color:blue; font-size: large;"></i>&nbsp;linkedin</a> &nbsp;
+                      <a  href="{{organisation.socialmedia['instagram']}}"><i class="fab fa-instagram-square"  style="color:red; font-size: large;"></i>&nbsp;instagram </a>&nbsp;
+                      <a  href="{{organisation.socialmedia['website']}}"> <i class="fab fa-audible"  style="color:darkgray; font-size: large;"></i>&nbsp;website</a>&nbsp;
+                    
+                    </div>
+                   
                   </div>
 
                   
@@ -88,41 +95,59 @@
               </div>
             </div>
           </div>
-          <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
-            
-            <button type="button" class="btn btn-primary btn-sm float-right" (click)="socialshow()">Ajouter Social Media</button>
+          <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2" >
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">formations:</h3>
 
-            <h5 class="mt-5 text-muted">formations</h5>
-            <ul class="list-unstyled">
-              <li>
-                <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i> Functional-requirements.docx</a>
-              </li>
-              <li>
-                <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-pdf"></i> UAT.pdf</a>
-              </li>
-              <li>
-                <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-envelope"></i> Email-from-flatbal.mln</a>
-              </li>
-              <li>
-                <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-image "></i> Logo.png</a>
-              </li>
-              <li>
-                <a href="" class="btn-link text-secondary"><i class="far fa-fw fa-file-word"></i> Contract-10_12_2014.docx</a>
-              </li>
-            </ul>
+                  </div>
+              <!-- /.card-header -->
+              <div class="card-body p-0" style="display: block;" >
+                <ul class="products-list product-list-in-card pl-2 pr-2">
+                  <li class="item" *ngFor="let formation of organisation.formations">
+                    <div class="product-img">
+                      <img src="assets/dist/img/default-150x150.png" alt="Product Image" class="img-size-50">
+                    </div>
+                    <div class="product-info">
+                      <a href="javascript:void(0)" class="product-title">{{ formation.titre }}
+                        <span class="badge badge-warning float-right">50</span></a>
+                      <span class="product-description">
+                        {{ formation.description }}
+                      </span>
+                    </div>
+                  </li>
+                 
+                
+                 
+                </ul>
+              </div>
+             
+            </div>
+          </div>
+            
+          <!-- <div style="width: 100%;height: 90%;">
+            <h5 class="text-center">formations</h5>
+            <li >
+              <a class=" text-muted">{{ formation.titre }} /{{formation.date_depart|date: 'MM/dd/yyyy'}} </a>
+            </li>
+          </div>-->
+          <!--  <button type="button"  *ngIf="!organisation.socialmedia" class="btn btn-primary btn-sm float-right" (click)="socialshow()">Ajouter Social Media</button>
+
+
             <div class="text-center mt-5 mb-3">
               <a href="#" class="btn btn-sm btn-danger">supprimer</a>
               <a href="#" class="btn btn-sm btn-info"  [routerLink]="['/contact/sendmailer']">envoyer un email </a>
               <a href="#" class="btn btn-sm btn-default ">Modifer </a>
             </div>
-          </div>
+            -->
+          
         </div>
       </div>
       <!-- /.card-body -->
     </div>
     <!-- /.card -->
   </section>
-  <section *ngIf="isHidden">
+  <section  *ngIf="isHidden">
    
   
     <div  class="card" style="padding-top: 15px; ">
@@ -131,34 +156,42 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-      <form class="form-inline">
+      <form class="form-inline" [formGroup]="socialform" (ngSubmit)="onSubmit()">
         
-          <div class="form-group mx-sm-3 mb-3">
+          <div class="form-group mx-sm-2 mb-3">
             <div class="input-group-addon">
               <i class="fab fa-facebook-f"  style="color:cornflowerblue; font-size: large;"></i>
               &nbsp;
             </div>
-            <input type="text" class="form-control"  placeholder="Url Facebook">
+            <input type="text" class="form-control" formControlName="facebook" placeholder="Url Facebook">
           </div>
-          <div class="form-group mx-sm-3 mb-3">
+          <div class="form-group mx-sm-2 mb-3">
             <div class="input-group-addon">
               <i class="fab fa-linkedin-in" style="color:blue; font-size: large;"></i>
               &nbsp;
             </div>
-            <input type="text" class="form-control"  placeholder="Url Linkedin">
+            <input type="text" class="form-control" formControlName="linkedin"  placeholder="Url Linkedin">
           </div>
-          <div class="form-group mx-sm-3 mb-3">
+          <div class="form-group mx-sm-2 mb-3">
             <div class="input-group-addon">
               <i class="fab fa-instagram-square"  style="color:red; font-size: large;"></i>
               &nbsp;
             </div>
-            <input type="text" class="form-control"  placeholder="Url Insatgram">
+            <input type="text" class="form-control" formControlName="instagram" placeholder="Url Insatgram">
+          </div>
+          <div class="form-group mx-sm-2 mb-3">
+            <div class="input-group-addon">
+               <i class="fab fa-audible"  style="color:darkgray; font-size: large;"></i>
+              &nbsp;
+            </div>
+            <input type="text" class="form-control" formControlName="website" placeholder="Url website">
           </div>
           <div class="form-group mx-sm-3 mb-3">
-          <button  type="submit" class="btn btn-primary mb-2" style="margin-top: 5px;">Ajouter</button>
+          <button  type="submit" class="btn btn-primary mb-2" [disabled]="socialform.invalid" style="margin-top: 5px;">Ajouter</button>
         </div>
   </form>
    </div>
       </section>
 
-    
+
+    </div>

@@ -30,6 +30,7 @@
       </div>
     <!-- /.card-header -->
     <div class="card-body">
+      <app-loading-data *ngIf="loading"></app-loading-data>
       <table  *ngIf="!loading" class="table table-bordered">
         <thead>                  
           <tr >
@@ -50,8 +51,8 @@
             <td>{{doc.description}}</td>
             <td>{{doc.pays}}</td>
             <td>{{doc.viile}}</td>
-            <td>{{doc.date_depart}}</td>
-            <td>{{doc.date_fin}}</td>
+            <td>{{doc.date_depart|date: 'MM/dd/yyyy'}}</td>
+            <td>{{doc.date_fin|date: 'MM/dd/yyyy'}}</td>
 
             <td>
                 <div style="display: inline-flex; font-size: large; padding: 5px 5px;"> 
@@ -59,7 +60,7 @@
                     <i class="fas fa-envelope"></i> &nbsp;
                     <i class="fas fa-trash-alt" style="color: red;"></i>
                     &nbsp;
-                    <a [routerLink]="['/contact/organisation/detaill']"><i class="fab fa-accusoft" style="color:seagreen;"></i></a>
+                    <a><i class="fab fa-accusoft" style="color:seagreen;"></i></a>
                 </div>
 
                 
@@ -71,7 +72,7 @@
       </table>
     </div>
     <!-- /.card-body -->
-    <div class="row">
+    <div class="row" style="margin: 30px;">
       <pagination-controls (pageChange)="pageChange($event)" ></pagination-controls>
      </div>
   </div>

@@ -15,10 +15,13 @@ import { AddclientComponent } from './client/addclient/addclient.component';
 import { AllclientComponent } from './client/allclient/allclient.component';
 import { SendmailerComponent } from './sendmailer/sendmailer.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { LoadingDataComponent } from './loading/loading-data/loading-data.component';
+import { DefaultimagePipe } from './../pipe/defaultimage.pipe';
 
 @NgModule({
-  declarations: [ FormationComponent, LayoutComponent, AddorganisationComponent, DetailleorganisationComponent, AllorganisationComponent, AddformationComponent, AllformationComponent, DetaillformationComponent, AddclientComponent, AllclientComponent, SendmailerComponent],
+  declarations: [ FormationComponent, LayoutComponent, AddorganisationComponent, DetailleorganisationComponent, AllorganisationComponent, AddformationComponent, AllformationComponent, DetaillformationComponent, AddclientComponent, AllclientComponent, SendmailerComponent, LoadingDataComponent],
   imports: [
+    
     CommonModule, 
     FormsModule, 
     ReactiveFormsModule,

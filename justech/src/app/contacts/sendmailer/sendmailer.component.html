@@ -20,27 +20,40 @@
         <h3 class="card-title">
             Composer un nouveau message</h3>
       </div>
+      <form [formGroup]="mailform" (ngSubmit)="sendmail()">
       <!-- /.card-header -->
       <div class="card-body">
         <div class="form-group">
-          <input class="form-control" placeholder="To:">
+          <input class="form-control" formControlName="to" placeholder="To:">
+          <span *ngIf="to.invalid && to.errors.required  && (to.dirty || to.touched)" style="color:red">
+            to est obligatoire.
+          </span>
         </div>
         <div class="form-group">
-          <input class="form-control" placeholder="Subject:">
+          <input class="form-control" formControlName="subject" placeholder="Subject:">
+          <span *ngIf="subject.invalid && subject.errors.required  && (subject.dirty || subject.touched)" style="color:red">
+            subject est obligatoire.
+          </span>
         </div>
-        <div class="form-group">
-            <textarea  class="form-control" name="" id="" cols="30" rows="10"></textarea>
-        </div>
-      >
+        <div class="form-group" >
+            <textarea  class="form-control" formControlName="message" id="" cols="30" rows="10"></textarea>
+            <span *ngIf="message.invalid && message.errors.required  && (message.dirty || message.touched)" style="color:red">
+              message est obligatoire.
+            </span>
+          </div>
+      
       </div>
       <!-- /.card-body -->
       <div class="card-footer">
         <div class="float-right">
           
-          <button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> Send</button>
+          <button type="submit"[disabled]="mailform.invalid" class="btn btn-primary">
+            <i *ngIf="loading" class="fa fa-circle-o-notch fa-spin" style="position: relative;bottom: 1px;margin-right:5px;"></i> 
+            <i class="far fa-envelope"></i> Send</button>
         </div>
         
       </div>
+    </form>
       <!-- /.card-footer -->
     </div>
     <!-- /.card -->

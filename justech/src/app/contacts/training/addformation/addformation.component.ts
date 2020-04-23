@@ -17,7 +17,7 @@ export class AddformationComponent implements OnInit {
   uploadedFiles: Array <File> ;
   filename:String;
   images:any;
-
+ dateNow = new Date();
   constructor(private formationService:FormationService,private http: HttpClient,  private notifyService : NotificationService,) { }
 
   ngOnInit(): void {
