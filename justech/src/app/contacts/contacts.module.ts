@@ -17,16 +17,20 @@ import { SendmailerComponent } from './sendmailer/sendmailer.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { LoadingDataComponent } from './loading/loading-data/loading-data.component';
 import { DefaultimagePipe } from './../pipe/defaultimage.pipe';
-
+import { NgSelectModule } from '@ng-select/ng-select';
+import { HomeComponent } from './home/home.component';
+import { StatistiqueComponent } from './statistique/statistique.component';
+import { StatComponent } from './loading/stat/stat.component';
 @NgModule({
-  declarations: [ FormationComponent, LayoutComponent, AddorganisationComponent, DetailleorganisationComponent, AllorganisationComponent, AddformationComponent, AllformationComponent, DetaillformationComponent, AddclientComponent, AllclientComponent, SendmailerComponent, LoadingDataComponent],
+  declarations: [ FormationComponent, LayoutComponent, AddorganisationComponent, DetailleorganisationComponent, AllorganisationComponent, AddformationComponent, AllformationComponent, DetaillformationComponent, AddclientComponent, AllclientComponent, SendmailerComponent, LoadingDataComponent, HomeComponent, StatistiqueComponent, StatComponent],
   imports: [
     
     CommonModule, 
-    FormsModule, 
     ReactiveFormsModule,
     ContactsRoutingModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgSelectModule,
+    FormsModule
   ]
 })
 export class ContactsModule { }

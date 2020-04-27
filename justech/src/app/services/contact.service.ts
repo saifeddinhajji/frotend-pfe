@@ -18,4 +18,7 @@ export class ContactService {
             return contact;
         }));
   }
+  all(page:number) {
+    return this.http.get(this.basUrl+`/all?page=${page}`);
+  }
 }

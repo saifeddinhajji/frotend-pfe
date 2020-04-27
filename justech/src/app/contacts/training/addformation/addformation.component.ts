@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'
 import { NotificationService } from '../../../services/notification.service';
 import { HttpClient } from '@angular/common/http';
 import { first } from 'rxjs/operators';
-
+import {OrganisationService} from './../../../services/organisation.service';
 import {FormationService} from './../../../services/formation.service';
 @Component({
   selector: 'app-addformation',
@@ -17,8 +17,12 @@ export class AddformationComponent implements OnInit {
   uploadedFiles: Array <File> ;
   filename:String;
   images:any;
+  items:any;
+  formData:FormData;
+  uploadfile: File = null;
+   URLFile:String;
  dateNow = new Date();
-  constructor(private formationService:FormationService,private http: HttpClient,  private notifyService : NotificationService,) { }
+  constructor(private formationService:FormationService,private http: HttpClient,  private notifyService : NotificationService,private organisationService:OrganisationService) { }
 
   ngOnInit(): void {
 
@@ -34,10 +38,38 @@ export class AddformationComponent implements OnInit {
       affiche:new FormControl(''),
       pays :new FormControl(''),
       ville:new FormControl(''),
-    });
-  }
 
+    });
+   
+    this.organisationService.list().subscribe((value) => {
+      console.log(value)
+      this.items=value;
+   }, (error) => {
+       console.log(error);
+   }, () => {
+       console.log('Fini !');
+   })
+    
+   
+ 
+  }
+/**********************************************image******************** */
+selectImage(file: FileList) {
+  this.uploadfile = file.item(0);
+  
+}
+sendfiletoserveur() {
+this.organisationService.postFile(this.uploadfile).subscribe(resultat => {
+  this.URLFile=resultat;
+ this.setaffiche(this.URLFile)
+  }, erreur => {
+    console.log("Erreur lors de l'envoi du fichier : ", erreur);
+  });
+}
   /*************************getter ******************************/
+  setaffiche(value:String){
+    this.formationform.controls['affiche'].setValue(value);
+    } 
   get titre() {
     return this.formationform.get('titre');
   }

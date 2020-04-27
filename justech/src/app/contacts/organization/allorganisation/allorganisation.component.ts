@@ -9,7 +9,7 @@ import { first } from 'rxjs/operators';
 })
 export class AllorganisationComponent implements OnInit {
 all_organisation:any;
-loading:boolean;
+loading:boolean=false;
 page:number;
   constructor(
     private route:ActivatedRoute,

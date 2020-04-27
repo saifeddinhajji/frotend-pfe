@@ -8,7 +8,7 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./allformation.component.css']
 })
 export class AllformationComponent implements OnInit {
-
+  customDate :Date;
   all_formation:any;
   loading:boolean;
   page:number;
@@ -21,6 +21,7 @@ export class AllformationComponent implements OnInit {
   
      }
   ngOnInit(): void {
+    this.customDate =new Date();
     this.route.queryParams.subscribe(params=>{
       this.loadAllformation(params);
     })

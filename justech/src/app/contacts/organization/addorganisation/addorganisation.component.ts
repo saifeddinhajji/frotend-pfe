@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { NotificationService } from '../../../services/notification.service';
 import { HttpClient } from '@angular/common/http';
+
 import { first } from 'rxjs/operators';
 import {OrganisationService} from './../../../services/organisation.service';
-import { elementClosest } from '@fullcalendar/core';
+
 @Component({
   selector: 'app-addorganisation',
   templateUrl: './addorganisation.component.html',
@@ -16,9 +17,13 @@ export class AddorganisationComponent implements OnInit {
   orgform:FormGroup;
   formData:FormData;
   uploadfile: File = null;
+  progress: number = 0;
    URLFile:String;
+   error: string;
+   uploadResponse = { status: '', message: '', filePath: '' };
+ 
   // City Names
-  Type: any = ['client', 'fournisseur', 'partenaire']
+  Type: any = ["client", "fournisseur","partenaire"];
 Domaine:any=["Les établissements universitaires publics, privé,","Les écoles primaires et secondaires","Les centres","Les labos de recherche","Les hôpitaux"," Les hôtels","Les maisons d’édition","Les agrégateurs"];
   constructor(  private http: HttpClient,  private notifyService : NotificationService,private organisationService:OrganisationService) { }
 
@@ -27,7 +32,7 @@ Domaine:any=["Les établissements universitaires publics, privé,","Les écoles 
       name:new FormControl(''),
       abreviation :new FormControl(''),
       description:new FormControl(''),
-      email:new FormControl('example@example.com'),
+      email:new FormControl(''),
       type:new FormControl(''),
       domaine:new FormControl(''),
       logo:new FormControl(''),
@@ -65,24 +70,27 @@ Domaine:any=["Les établissements universitaires publics, privé,","Les écoles 
 
 
   }
+  /**********************************uplod logo organisation */
  
   selectImage(file: FileList) {
     this.uploadfile = file.item(0);
     
 }
 sendfiletoserveur() {
-  this.organisationService.postFile(this.uploadfile).subscribe(resultat => {
+ this.organisationService.postFile(this.uploadfile).subscribe(resultat => {
     this.URLFile=resultat;
    this.logo(this.URLFile)
     }, erreur => {
       console.log("Erreur lors de l'envoi du fichier : ", erreur);
     });
+   
+    
 }
 
 
-  get type() {
-    return this.orgform.get('name');
-  }
+ /**********************************end -uplod logo organisation */
+
+ 
  logo(value:String){
 this.orgform.controls['logo'].setValue(value);
 }
@@ -91,7 +99,7 @@ this.orgform.controls['logo'].setValue(value);
     this.orgform.controls['type'].setValue(e.target.value, {
       onlySelf: true
     });
-    console.log(this.orgform.controls['type'].value)
+    
   }
   changedomaine(e) {
     this.orgform.controls['doamine'].setValue(e.target.value, {
@@ -99,12 +107,16 @@ this.orgform.controls['logo'].setValue(value);
     });
     console.log(this.orgform.controls['domaine'].value)
   }
+  /************************************exemple getter data***************************/
+/*  get type() {
+    return this.orgform.get('name');
+  }
   get email() {
     return this.orgform.get('email');
   }
   get tel() {
     return this.orgform.get('tel1');
-  }
+  }*/
   revert() {
     this.orgform.reset();
   }

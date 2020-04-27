@@ -13,78 +13,75 @@
       </div>
     </div><!-- /.container-fluid -->
   </section>
-  <div class="card">
-  
-    <div class="card-header">
-        <h3 class="card-title">organisations</h3>
+  <app-statistique></app-statistique>
+  <section class="content-header">
+    <div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">organisations</h3>
 
-        <div class="card-tools">
-          <div class="input-group input-group-sm" style="width: 150px;">
-            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+          <div class="card-tools">
+            <div class="input-group input-group-sm" style="width: 150px;">
+              <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
 
-            <div class="input-group-append">
-              <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    <!-- /.card-header -->
-    <div class="card-body">
-      <app-loading-data *ngIf="loading"></app-loading-data>
-      <table  class="table table-bordered">
-        <thead>                  
-          <tr>
-            <th style="width: 10px">#</th>
-            <th>name</th>
-            <th>type</th>
-            <th>telp</th>
-            <th>email</th>
-            <th>Nombre de formation</th>
-            <th style="width: 40px"> &nbsp; &nbsp; &nbsp;</th>
-          </tr>
-        </thead>
-        <tbody >
-          
-          <tr *ngFor="let doc of all_organisation.docs | paginate: { itemsPerPage: all_organisation.limit, currentPage: all_organisation.page,totalItems:all_organisation.total};index as i; ">
-            <td>1.</td>
-            <td>{{doc.name}}</td>
-            <td>{{doc.email}}</td>
-            <td>{{doc.tel1}}</td>
-            <td>{{doc.fax}}</td>
-            <td>{{doc.formations.length}}</td>
+        <!-- /.card-header -->
+        <app-loading-data *ngIf="loading"></app-loading-data>
+        <div class="card-body table-responsive p-0" >
+          <table class="table text-nowrap">
+            <thead>
+              <tr >
+                <th>N°</th>
+                <th>Nom(abreviation)</th>
+                <th>Type</th>
+                <th>Email</th>
+                <th>...</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr  *ngFor="let doc of all_organisation.docs | paginate: { itemsPerPage: all_organisation.limit, currentPage: all_organisation.page,totalItems:all_organisation.total};let i = index ">
+                <td>{{i}}</td>
+                <td><img class="img-circle img-bordered-sm" src={{doc.logo}}  style="width: 40px; border-radius: 50%;" alt="user image">
+                {{doc.name}}({{doc.abreviation}})</td>
+                <td>{{doc.type}}</td>
+                <td>{{doc.email}}</td>
+                <td>
 
-            <td>
-            <!--
-                <div style="display: inline-flex; font-size: large; padding: 5px 5px;"> 
-                  <a class="btn">  <i style="color: blue;"></i></a>  &nbsp;
-                  <a >  <i class="fas fa-envelope" ></i> </a>&nbsp;
-                   <a class="btn btn-dark"> <i class="fas fa-trash-alt" style="color: red;"></i></a>
-                    &nbsp;
-                    <a ></a>
-                </div>
-                -->
-                <div class="card-footer clearfix" style="padding:0px">
-      
-                  <div class="btn-group btn-group-sm">
-                    <a class="btn btn-info" [routerLink]="['/contact/organisation/',doc._id]"><i class="fas fa-eye"></i></a>
-                    <a  class="btn btn-dark" [routerLink]="['/contact/sendmailer']"><i class="fas fa-envelope"  style="color: red;"></i></a>
-                    <a  class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                    <a  class="btn btn-secondary"><i class="fas fa-edit"></i></a>
-                     </div>
-                
-              </div>
-                
-            </td>
-          </tr>
-   
-          
-        </tbody>
+                 
         
-      </table>
+                    <div class="btn-group btn-group-sm">
+                      <a class="btn btn-info" [routerLink]="['/contact/organisation/',doc._id]"><i class="fas fa-eye"></i></a>
+                      <a  class="btn btn-dark" [routerLink]="['/contact/sendmailer']"><i class="fas fa-envelope"  style="color: red;"></i></a>
+                      <a  class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                      <a  class="btn btn-secondary"><i class="fas fa-edit"></i></a>
+                       </div>
+                  
+                </td>
+              </tr>
+             
+            </tbody>
+           
+          </table>
+        
+        </div>
+        <!-- /.card-body -->
+        <pagination-controls (pageChange)="pageChange($event)" ></pagination-controls>
+      </div>
+      <!-- /.card -->
     </div>
-    <div class="row" style="margin: 30px;">
-      <pagination-controls (pageChange)="pageChange($event)" ></pagination-controls>
-     </div>
-    <!-- /.card-body -->
-    
   </div>
+
+</div>
+</section>
+
+
+
+
+  

@@ -25,21 +25,21 @@
 
               <div class="form-group">
                 <label >Nom organisation :</label>
-                <input  formControlName="name" class="form-control" >
+                <input  formControlName="name" class="form-control" placeholder="nom d'organisation">
               </div>
              
               <div class="form-group">
                 <label > abréviation  :</label>
-                <input  formControlName="abreviation"  class="form-control" >
+                <input  formControlName="abreviation"   class="form-control" placeholder="abreviation" >
               </div>
               <div class="form-group">
                 <label >Description :</label>
-                <textarea  formControlName="description"  class="form-control" rows="1"></textarea>
+                <textarea  formControlName="description"   class="form-control"  rows="1" placeholder="description"></textarea>
               </div>
 
               <div class="form-group">
                 <label >Email :</label>
-                <input type="email" formControlName="email" class="form-control"  placeholder="Enter email">
+                <input type="email" formControlName="email" class="form-control"  placeholder=" email">
                 <!--<span *ngIf="email.invalid && email.errors.required  && (email.dirty || email.touched)" class="error">
                   Ce champ est obligatoire.
                 </span>
@@ -49,19 +49,35 @@
               
               <hr>
 
-             <div class="form-group">
-                <label for="inputStatus">type</label>
+            
+               <!------------------------------------------>
+              
+
+              <!--<div class="form-group">
+                <label for="inputStatus"> Type  :</label>
                       <select    formControlName="type" (change)="changetype($event)"  class="form-control custom-select" >
-                      <option selected="" disabled="" value="selectioner un type d'organisation">selectioner un type d'organisation</option>
+                      <option selected="" disabled="" >selectioner un domaine d'organisation</option>
                       <option *ngFor="let type of Type" [ngValue]="type">{{type}}</option>     
                 </select>
                 
                </div>
+               --> 
+               <div class="form-group">
+                <label for="inputStatus"> Type  :</label>
+                      <select    formControlName="type" (change)="changetype($event)" class="form-control custom-select" >
+                      <option selected="" disabled="" >selectioner un domaine d'organisation</option>
+                      <option  value="client">client</option> 
+                      <option  value="fournisseur">fournisseur</option> 
+                      <option  value="partenaire">partenaire</option>     
+                </select>
+                
+               </div>
+               <!------------------------------------------->
                
                <div class="form-group">
-                <label for="inputStatus">domaine de service</label>
+                <label for="inputStatus">Domaine de service  :</label>
                       <select    formControlName="domaine" (change)="changedomaine($event)"  class="form-control custom-select" >
-                      <option selected="" disabled="" value="selectioner un domaine d'organisation">selectioner un domaine d'organisation</option>
+                      <option selected="" disabled="" >selectioner un domaine d'organisation</option>
                       <option *ngFor="let domaine of Domaine" [ngValue]="domaine">{{domaine}}</option>     
                 </select>
                 
@@ -81,7 +97,7 @@
             
               <div class="form-group">
                 <label for="domaine">Tel :</label>
-                <input type="number" min="5" formControlName="tel1" class="form-control" id="domaine" >
+                <input type="number" min="5" formControlName="tel1" class="form-control" placeholder="(+xxx) xx xxx xxx" >
                <!-- <span *ngIf="tel1.invalid && tel1.errors.required  && (tel1.dirty || tel1.touched)" class="error">
                   Ce champ est obligatoire
               </span>
@@ -93,33 +109,33 @@
 
               <div class="form-group">
                 <label >Tel :</label>
-                <input type="number" min="5" formControlName="tel2"  class="form-control" >
+                <input type="number" min="5" formControlName="tel2"  placeholder="(+xxx) xx xxx xxx"  class="form-control" >
               </div>
 
               <div class="form-group">
                 <label >Fax :</label>
-                <input type="number" min="5" formControlName="fax" class="form-control"  >
+                <input type="number" min="5" formControlName="fax"  placeholder=" xx xxx xxx" class="form-control"  >
               </div>
 
              
               <div class="form-group">
-                <label >pays :</label>
-                <input type="text"  formControlName="pays" class="form-control"  >
+                <label>Pays :</label>
+                <input type="text"  formControlName="pays"  placeholder="pays"  class="form-control"  >
               </div>
               <hr>
               <div class="form-group">
-                <label >ville :</label>
-                <input type="text"  formControlName="ville" class="form-control"  >
+                <label >Ville :</label>
+                <input type="text"  formControlName="ville"  placeholder="ville"  class="form-control"  >
               </div>
               <div class="form-group">
                 <label >Logo</label>
                 <div class="input-group">
                   <div class="custom-file">
                     <input type="file"  class="custom-file-input"   (change)="selectImage($event.target.files)">
-                    <label class="custom-file-label"  >Choose file</label>
+                    <label class="custom-file-label"  >choisir un logo</label>
                   </div>
                   <div class="input-group-append">
-                    <span class="input-group-text"  (click)="sendfiletoserveur()" >Upload</span>
+                    <span class="input-group-text"  (click)="sendfiletoserveur()" >telecharger</span>
                   </div>
                 </div>
               </div>
@@ -128,7 +144,7 @@
           </div>
           <div class="card-footer " >
             <button  class="btn btn-danger float-right" (click)="revert()" type="reset">  Annuler</button>
-             <button type="submit" class="btn btn-primary float-right" style="margin: 2px;" type="submit" [disabled]="orgform.invalid">
+             <button type="submit" class="btn btn-primary float-right" style="margin-right: 2px;" type="submit" [disabled]="orgform.invalid">
               <i *ngIf="loading" class="fa fa-circle-o-notch fa-spin" style="position: relative;bottom: 1px;margin-right:5px;"></i> 
               Ajouter</button>
               
@@ -136,9 +152,9 @@
         </form>
 
 </div>
-        <p>Form value: {{ orgform.value | json }}</p>
-        <p>Form status: {{ orgform.status | json }}</p>
+        
     </div>
     
   </section>
- 
+<p>Form value: {{ orgform.value | json }}</p>
+         <!--<p>Form status: {{ orgform.status | json }}</p>-->

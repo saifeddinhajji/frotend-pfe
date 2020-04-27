@@ -12,8 +12,9 @@ import { LoginComponent } from './login/login.component';
 import { LayoutComponent } from './layout/layout.component';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TestComponent } from './test/test.component';
 @NgModule({
-  declarations: [LoginComponent, LayoutComponent],
+  declarations: [LoginComponent, LayoutComponent, TestComponent],
   imports: [
     CommonModule, 
     FormsModule, 

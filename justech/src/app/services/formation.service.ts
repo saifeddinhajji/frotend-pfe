@@ -11,7 +11,7 @@ export class FormationService {
   readonly  basUrl='http://localhost:5000/formation';
   constructor(private http: HttpClient) { }
   add(data:any) {
-    return this.http.post<any>(this.basUrl+`/add`, data)
+    return this.http.post<any>(this.basUrl+`/create/`+data.organisateur, data)
         .pipe(map(org => {
             
             if (org) {

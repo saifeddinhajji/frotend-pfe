@@ -40,6 +40,7 @@ login(email: string, password: string) {
 
 logout() {
   localStorage.removeItem('currentUser');
+  localStorage.removeItem('roles');
   this.currentUserSubject.next(null);
 }
 }

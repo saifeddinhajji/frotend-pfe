@@ -7,7 +7,8 @@ import { first } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { NotificationService } from './../../services/notification.service'
+import { NotificationService } from './../../services/notification.service';
+import { RoleService } from './../../services/role.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -25,7 +26,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
    private authenticationService: AuthenticationService,
-    private notifyService : NotificationService
+    private notifyService : NotificationService,
+    private roleservice:RoleService
     ) { }
 
   ngOnInit(): void {
@@ -58,10 +60,24 @@ export class LoginComponent implements OnInit {
     .pipe(first())
     .subscribe(
         data => {
-         
-          console.log(data)
-            this.loading=false;
-          
+         if(data.error){
+           this.notifyService.showError("login ou mot de passe incorrect", "");
+          this.loading=false;
+         }
+         else
+         { 
+           
+                 this.loading=false;
+                console.log(data)
+                 /*************all roles for this user*****************/
+                this.roleservice.userroles(data._id).subscribe(res=>{
+                /*  res.map(role=>{
+                   console.log(role)
+                 })*/
+                
+                    localStorage.setItem("roles", JSON.stringify(res))
+                   // localStorage.setItem("roles", "saif");
+                });
             if(data.role=="employeur")
             {
               this.router.navigate(['/employeur']);
@@ -78,7 +94,7 @@ export class LoginComponent implements OnInit {
             }
             else{
               this.toastr.success('login correct', 'any');
-            }
+            }}
                   },
         error => {
           console.log(error)

@@ -1,0 +1,58 @@
+    <!-- /.card-header -->
+    <div class="card-body">
+        <app-loading-data *ngIf="loading"></app-loading-data>
+        <table  class="table table-bordered">
+          <thead>                  
+            <tr>
+              <th style="width: 10px">#</th>
+              <th>name</th>
+              <th>type</th>
+              <th>telp</th>
+              <th>email</th>
+              <th>Nombre de formation</th>
+              <th style="width: 40px"> &nbsp; &nbsp; &nbsp;</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="all_organisation.docs"> 
+            
+            <tr *ngFor="let doc of all_organisation.docs | paginate: { itemsPerPage: all_organisation.limit, currentPage: all_organisation.page,totalItems:all_organisation.total};let i = index ">
+              <td>{{i+1}}</td>
+              <td> <img class="img-circle img-bordered-sm" src={{doc.logo}}  style="width: 50px;" alt="user image">{{doc.name}}</td>
+              <td>{{doc.email}}</td>
+              <td>{{doc.tel1}}</td>
+              <td>{{doc.fax}}</td>
+              <td>{{doc.formations.length}}</td>
+  
+              <td>
+              <!--
+                  <div style="display: inline-flex; font-size: large; padding: 5px 5px;"> 
+                    <a class="btn">  <i style="color: blue;"></i></a>  &nbsp;
+                    <a >  <i class="fas fa-envelope" ></i> </a>&nbsp;
+                     <a class="btn btn-dark"> <i class="fas fa-trash-alt" style="color: red;"></i></a>
+                      &nbsp;
+                      <a ></a>
+                  </div>
+                  -->
+                  <div class="card-footer clearfix" style="padding:0px">
+        
+                    <div class="btn-group btn-group-sm">
+                      <a class="btn btn-info" [routerLink]="['/contact/organisation/',doc._id]"><i class="fas fa-eye"></i></a>
+                      <a  class="btn btn-dark" [routerLink]="['/contact/sendmailer']"><i class="fas fa-envelope"  style="color: red;"></i></a>
+                      <a  class="btn btn-danger"><i class="fas fa-trash"></i></a>
+                      <a  class="btn btn-secondary"><i class="fas fa-edit"></i></a>
+                       </div>
+                  
+                </div>
+                  
+              </td>
+            </tr>
+     
+            
+          </tbody>
+          
+        </table>
+      </div>
+      <div class="row" style="margin: 30px;">
+        <pagination-controls (pageChange)="pageChange($event)" ></pagination-controls>
+       </div>
+      <!-- /.card-body -->

@@ -13,3 +13,14 @@ input.ng-touched.ng-valid {
 .error {
 color:red
 }
+.ng-select .ng-select-container {
+    cursor: default;
+    display: flex;
+    outline: 0;
+    overflow: hidden;
+    top: -6px;
+    left: -13px;
+    position: relative;
+    width: 100%;
+}
+  

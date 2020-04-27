@@ -12,11 +12,14 @@ import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ErrorInterceptor } from './helpers/error.interceptor';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DefaultimagePipe } from './pipe/defaultimage.pipe';
+import { FormsModule } from '@angular/forms';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
     AppComponent,
     DefaultimagePipe,
+   
    
   ],
   imports: [
@@ -28,6 +31,8 @@ import { DefaultimagePipe } from './pipe/defaultimage.pipe';
     HttpClientModule,
     NgxPaginationModule,
     BrowserAnimationsModule,
+    NgSelectModule,
+    FormsModule,
     ToastrModule.forRoot(),
     
     // required animations module

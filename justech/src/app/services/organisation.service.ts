@@ -1,15 +1,22 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map, first } from 'rxjs/operators';
+import {  HttpEvent, HttpErrorResponse, HttpEventType } from  '@angular/common/http';
+import { HttpClient } from  '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import {Organisation} from './../models/organisation';
-import {Formation} from './../models/Formation';
+
+import {ItemOrg} from './../models/ItemOrg';
+
 @Injectable({
   providedIn: 'root'
 })
 export class OrganisationService {
   organisation:Organisation;
- 
+ listitem:ItemOrg[];
+
+
+
+
   org:any;
   readonly  basUrl='http://localhost:5000/organisation';
   readonly basUrlFile='http://localhost:5000';
@@ -25,6 +32,10 @@ export class OrganisationService {
             return org;
         }));
   }
+  //list
+  list(){
+    return this.http.get(this.basUrl+'/list');
+        }
   all(page:number) {
     return this.http.get(this.basUrl+`/all?page=${page}`);
   }
@@ -34,7 +45,7 @@ export class OrganisationService {
     {
       return  this.http.get<Organisation>(this.basUrl+`/find/formation/`+id).pipe(
         map(response =>{
-          //console.log(response)
+          console.log(response)
           const organisation=new Organisation(response);
           return organisation;
         })
@@ -55,6 +66,9 @@ export class OrganisationService {
       map((res) => { return res; })
      );
 }
+
+
+
 SocialMedia(_id:String,formsocial:any){
   return this.http.post<any>(this.basUrl+`/socialmedia/`+_id, formsocial)
   .pipe(map(socialmedia => {
@@ -65,6 +79,8 @@ SocialMedia(_id:String,formsocial:any){
   }));
 }
     
+   
+ 
 }
 
  

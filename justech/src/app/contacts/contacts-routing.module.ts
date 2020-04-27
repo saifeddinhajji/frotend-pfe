@@ -10,13 +10,19 @@ import { AddclientComponent } from './client/addclient/addclient.component';
 import { AllclientComponent } from './client/allclient/allclient.component';
 import { SendmailerComponent } from './sendmailer/sendmailer.component';
 import { LoadingDataComponent } from './loading/loading-data/loading-data.component';
+import { HomeComponent } from './home/home.component';
+import { StatistiqueComponent } from './statistique/statistique.component';
+import { StatComponent } from './loading/stat/stat.component';
 
 
 const routes: Routes = [
   {path:'contact',component:LayoutComponent,
         children: [
           { path: '', redirectTo: 'home', pathMatch: 'full' },
+          {path:"home",component:HomeComponent},
          { path: 'loader', component:LoadingDataComponent },
+         { path: 'loaderstat', component:StatComponent },
+                 
          {path:'sendmailer',component:SendmailerComponent},
           {path:'formation',
           children:[
