@@ -14,7 +14,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DefaultimagePipe } from './pipe/defaultimage.pipe';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
-
+import { HttpErrorInterceptor } from './helpers/http-error.interceptor'
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +47,11 @@ import { NgSelectModule } from '@ng-select/ng-select';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+   // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    {provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor,multi: true}
+    
+ 
+ 
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

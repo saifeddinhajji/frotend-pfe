@@ -48,7 +48,7 @@
                 <th>...</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody *ngIf="!loading">
               <tr  *ngFor="let doc of all_formation.docs | paginate: { itemsPerPage: all_formation.limit, currentPage: all_formation.page,totalItems:all_formation.total};let i = index ">
                 
                 <td>{{doc.titre}}</td>

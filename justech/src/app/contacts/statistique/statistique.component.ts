@@ -17,7 +17,7 @@ loading:boolean=false;
 this.statistiqueService.stat_simple().subscribe(res=>
   {this.stat_simple=res;
     this.loading=true;
-  console.log(this.stat_simple)}
+  }
   )
   }
 

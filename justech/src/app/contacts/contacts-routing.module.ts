@@ -13,7 +13,7 @@ import { LoadingDataComponent } from './loading/loading-data/loading-data.compon
 import { HomeComponent } from './home/home.component';
 import { StatistiqueComponent } from './statistique/statistique.component';
 import { StatComponent } from './loading/stat/stat.component';
-
+import { UpdateorganisationComponent } from './organization/updateorganisation/updateorganisation.component';
 
 const routes: Routes = [
   {path:'contact',component:LayoutComponent,
@@ -34,7 +34,9 @@ const routes: Routes = [
             children:[
              {path:'add',component:AddorganisationComponent},
              {path:'all',component:AllorganisationComponent},
+             {path:':id/update',component:UpdateorganisationComponent},
              {path:':id',component:DetailleorganisationComponent},
+             
             ]},
             {path:'client',
             children:[

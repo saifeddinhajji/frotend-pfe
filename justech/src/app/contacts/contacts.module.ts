@@ -21,8 +21,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { HomeComponent } from './home/home.component';
 import { StatistiqueComponent } from './statistique/statistique.component';
 import { StatComponent } from './loading/stat/stat.component';
+import { UpdateorganisationComponent } from './organization/updateorganisation/updateorganisation.component';
 @NgModule({
-  declarations: [ FormationComponent, LayoutComponent, AddorganisationComponent, DetailleorganisationComponent, AllorganisationComponent, AddformationComponent, AllformationComponent, DetaillformationComponent, AddclientComponent, AllclientComponent, SendmailerComponent, LoadingDataComponent, HomeComponent, StatistiqueComponent, StatComponent],
+  declarations: [ FormationComponent, LayoutComponent, AddorganisationComponent, DetailleorganisationComponent, AllorganisationComponent, AddformationComponent, AllformationComponent, DetaillformationComponent, AddclientComponent, AllclientComponent, SendmailerComponent, LoadingDataComponent, HomeComponent, StatistiqueComponent, StatComponent, UpdateorganisationComponent],
   imports: [
     
     CommonModule, 

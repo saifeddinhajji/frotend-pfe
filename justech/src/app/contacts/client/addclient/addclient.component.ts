@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { NotificationService } from '../../../services/notification.service';
 import { HttpClient } from '@angular/common/http';
-import { first } from 'rxjs/operators';
+import { first, flatMap } from 'rxjs/operators';
 import {OrganisationService} from './../../../services/organisation.service';
 import {ContactService} from './../../../services/contact.service';
+import { error } from '@angular/compiler/src/util';
 @Component({
   selector: 'app-addclient',
   templateUrl: './addclient.component.html',
@@ -14,12 +15,13 @@ export class AddclientComponent implements OnInit {
   loading = false;
   submitted = false;
   contactform:FormGroup;
-  formData:FormData;
-  uploadfile: File = null;
-  URLFile:String;
+   /*******************image***/
+   defaultvalue="choisir un photo";
+   formData:FormData;
+   uploadfile: File = null;
+   
   
   items:any;
-  Type: any = ['client', 'fournisseur', 'partenaire']
   constructor(private organisationService:OrganisationService,
     private contactService:ContactService,
     private notifyService:NotificationService) { }
@@ -29,14 +31,15 @@ export class AddclientComponent implements OnInit {
   ngOnInit(): void {
 
     this.contactform= new FormGroup({
-      first_name:new FormControl(''),
-      last_name :new FormControl(''),
-      sexe:new FormControl(''),
+      first_name:new FormControl('',[Validators.required]),
+      last_name :new FormControl('',[Validators.required]),
+      sexe:new FormControl('',[Validators.required]),
       niveau:new FormControl(''),
       tel:new FormControl(''),
       type:new FormControl(''),
+      organisateurs:new FormControl(''),
       profession:new FormControl(''),
-      email:new FormControl(''),
+      email:new FormControl('',[Validators.required,Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
       photo:new FormControl(''),
       biograhie :new FormControl(''),
       
@@ -54,44 +57,64 @@ export class AddclientComponent implements OnInit {
    
   }
 
-  getValues() {
-    if(this.selected)
-    {
-    //  alert(this.selected)
-    }
-    else{
-     // alert("vide")
-    }
-  }
 
-  saveclient(){
+  onSubmit(){
     this.loading=true
-    this.contactService.add({form:this.contactform.value,orgs:this.selected}).subscribe(
-      res =>{console.log(res);
-        this.notifyService.showSuccess("enregistré avec succès","this.contactform.controls['first_name'].value");
-        this.loading=false}
+    this.contactform.controls['organisateurs'].setValue(this.selected);
+
+      this.contactService.add(this.contactform.value).subscribe(
+      contact =>{
+        this.loading=false
+        this.revert() 
+        this.notifyService.showSuccess(contact.message,this.contactform.controls['first_name'].value);
+        
+        
+      },
+      error=>{
+        this.loading=false;
+        this.notifyService.showError(error,'')
+      },
+      () => this.onComplete()
     )
-   console.warn(this.contactform.value)
+  
   }
 
+onComplete(){}
 
 
 
 
+
+revert(){
+  this.loading=false;
+  this.defaultvalue="";
+  this.selected=[]
+  this.contactform.reset();
+}
 
 /********************upload photo to serveur express js*****************/
 photo(value:String){
   this.contactform.controls['photo'].setValue(value);
   }
 
-selectImage(file: FileList) {
-  this.uploadfile = file.item(0);
-  
+  selectImage(file: FileList) {
+    this.uploadfile = file.item(0);
+    this.defaultvalue=this.uploadfile.name;
+    this.sendfiletoserveur();
+    
 }
 sendfiletoserveur() {
-this.organisationService.postFile(this.uploadfile).subscribe(resultat => {
-  this.URLFile=resultat;
- this.photo(this.URLFile)
+this.contactService.postFile(this.uploadfile).subscribe(resultat => {
+  if(resultat!="Only .png, .jpg and .jpeg format allowed!"){
+    this.photo(resultat)
+  }
+  else{
+    this.defaultvalue="choisir un photo"
+      this.notifyService.showError("Seuls les formats .png, .jpg et .jpeg sont autorisés!",'');
+
+  }
+  
+ 
   }, erreur => {
     console.log("Erreur lors de l'envoi du fichier : ", erreur);
   });

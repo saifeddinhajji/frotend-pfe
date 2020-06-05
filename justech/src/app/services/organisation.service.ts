@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
 import {  HttpEvent, HttpErrorResponse, HttpEventType } from  '@angular/common/http';
 import { HttpClient } from  '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable,throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import {Organisation} from './../models/organisation';
-
+import {Item} from '../models/Item'
 import {ItemOrg} from './../models/ItemOrg';
-
+import {  retry } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
 export class OrganisationService {
+   readonly basUrl='http://localhost:5000';
   organisation:Organisation;
  listitem:ItemOrg[];
 
@@ -18,35 +19,32 @@ export class OrganisationService {
 
 
   org:any;
-  readonly  basUrl='http://localhost:5000/organisation';
-  readonly basUrlFile='http://localhost:5000';
+ 
   constructor(private http: HttpClient) { }
   add(data:any) {
-    return this.http.post<any>(this.basUrl+`/add`, data)
-        .pipe(map(org => {
-            
-            if (org) {
-            console.log(org)  
-            }
-  
-            return org;
-        }));
+    return this.http.post<any>(this.basUrl+`/organisation/add`, data);
+          
   }
   //list
   list(){
-    return this.http.get(this.basUrl+'/list');
+    return this.http.get(this.basUrl+'/organisation/list');
         }
-  all(page:number) {
-    return this.http.get(this.basUrl+`/all?page=${page}`);
+  listservice():Observable<Item[]>{
+   return this.http.get<Item[]>(this.basUrl+'/organisation/listservice');
+    }
+    listtype():Observable<Item[]>{
+      return this.http.get<Item[]>(this.basUrl+'/organisation/listtype');
+       }
+  all(page:number,data:any) {
+        return this.http.post(this.basUrl+`/organisation/all?page=${page}`,data);
   }
 
 
     detaille(id:any):Observable<Organisation>
     {
-      return  this.http.get<Organisation>(this.basUrl+`/find/formation/`+id).pipe(
+      return  this.http.get<Organisation>(this.basUrl+`/organisation/find/formation/`+id).pipe(
         map(response =>{
-          console.log(response)
-          const organisation=new Organisation(response);
+         const organisation=new Organisation(response);
           return organisation;
         })
       )
@@ -62,7 +60,7 @@ export class OrganisationService {
     
     const formData: FormData = new FormData();
     formData.append('profile', uploadfile, uploadfile.name);
-    return this.http.post<String>(this.basUrlFile+`/upload/image`, formData).pipe(
+    return this.http.post<String>(this.basUrl+`/upload/organisation`, formData).pipe(
       map((res) => { return res; })
      );
 }
@@ -70,12 +68,8 @@ export class OrganisationService {
 
 
 SocialMedia(_id:String,formsocial:any){
-  return this.http.post<any>(this.basUrl+`/socialmedia/`+_id, formsocial)
-  .pipe(map(socialmedia => {
-      
-     console.log(socialmedia)
-
-      
+  return this.http.post<any>(this.basUrl+`/organisation/socialmedia/`+_id, formsocial)
+  .pipe(map(socialmedia => {     
   }));
 }
     

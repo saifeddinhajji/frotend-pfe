@@ -15,13 +15,5 @@ export class StatistiqueService {
   
   stat_simple():Observable<Statistique>{
     return this.http.get<Statistique>(this.basUrl+'/stat_simple')
-    .pipe(map(stat => {
-            
-      if (stat) {
-      console.log(stat)  
-      }
-
-      return stat;
-  }));
-  }
+    }
 }

@@ -7,9 +7,14 @@ input.ng-touched.ng-invalid {
     border-color:red;
 }
 
-input.ng-touched.ng-valid {
+/*input.ng-touched.ng-valid {
     border-color:green;
 }
-.error {
-color:red
-}
+*/
+.error{
+    color: red;
+    font-size: 15px;
+  }
+  .custom-file-input ~ .custom-file-label:lang(fr)::after {
+    content: "Choisir...";
+  }

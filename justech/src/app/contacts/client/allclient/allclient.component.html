@@ -51,7 +51,7 @@
                 <th></th>
               </tr>
             </thead>
-            <tbody>
+            <tbody *ngIf="!loading">
               <tr  *ngFor="let doc of all_client.docs | paginate: { itemsPerPage: all_client.limit, currentPage: all_client.page,totalItems:all_client.total};let i = index ">
                 
                 <td>{{doc.first_name}}</td>

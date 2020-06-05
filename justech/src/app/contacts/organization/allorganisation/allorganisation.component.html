@@ -14,25 +14,56 @@
     </div><!-- /.container-fluid -->
   </section>
   <app-statistique></app-statistique>
+  
   <section class="content-header">
     <div class="container-fluid">
-  <div class="row">
-    <div class="col-12">
-      <div class="card">
-        <div class="card-header">
-          <h3 class="card-title">organisations</h3>
+    
+      <div class="row">
+        
+        <div class="com-sm-12 col-md-3">
+          
+             <select  [formControl]="nbrpage" (change)="serach()" class="custom-select custom-select-sm form-control form-control-sm">
+              <option  disabled selected>page</option> 
+              <option value="10">10</option>
+               <option value="25">25</option>
+               <option value="50">50</option>
+               <option value="75">75</option>
+               <option value="100">100</option>
+              </select>
+        </div>
+        <div class="com-sm-12 col-md-3">
+              
+              <select  [formControl]="orderdate" (change)="serach()" class="custom-select custom-select-sm form-control form-control-sm" >
+                <option  disabled selected>trier par date</option> 
+                <option value="1">croissant</option>
+                <option value="-1">decroissant</option>
+              </select> 
+        </div>
+        <div class="com-sm-12 col-md-3">
+          
+          <input type="date" [formControl]="date" (change)="serach()"  class="form-control form-control-sm" >
 
-          <div class="card-tools">
-            <div class="input-group input-group-sm" style="width: 150px;">
-              <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+              
+        </div>
+        
+           <div class="col-sm-12 col-md-3">
+             
+            <div class="input-group input-group-sm">
+              <input type="text" [formControl]="textsearch" class="form-control form-control-sm float-right" (change)="serach()" placeholder="(nom,abreviation,desc....)">
 
               <div class="input-group-append">
-                <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                <button type="button" class="btn btn-default"><i class="fas fa-search"></i></button>
               </div>
             </div>
           </div>
-        </div>
-        <!-- /.card-header -->
+        
+
+      </div>
+      <hr>
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+       
         <app-loading-data *ngIf="loading"></app-loading-data>
         <div class="card-body table-responsive p-0" >
           <table class="table text-nowrap">
@@ -42,32 +73,39 @@
                 <th>Nom(abreviation)</th>
                 <th>Type</th>
                 <th>Email</th>
+                <th>NBF</th>
+                <th>NBC</th>
+                <th>date</th>
                 <th>...</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody *ngIf="!loading" > 
               <tr  *ngFor="let doc of all_organisation.docs | paginate: { itemsPerPage: all_organisation.limit, currentPage: all_organisation.page,totalItems:all_organisation.total};let i = index ">
                 <td>{{i}}</td>
-                <td><img class="img-circle img-bordered-sm" src={{doc.logo}}  style="width: 40px; border-radius: 50%;" alt="user image">
-                {{doc.name}}({{doc.abreviation}})</td>
+                <td><img class="img-circle img-bordered-sm" src="{{doc.logo.url}}" style="width: 40px; border-radius: 50%;" alt="user image" *ngIf="doc.logo">
+                {{doc.name}} <span style="color: rebeccapurple;"*ngIf="doc.abreviation">({{doc.abreviation}})</span></td>
                 <td>{{doc.type}}</td>
                 <td>{{doc.email}}</td>
+                <th>{{doc.formations.length}}</th>
+                <th>{{doc.contacts.length}}</th>
+                <th>{{doc.created_at |date: "short"}}</th>
+                
                 <td>
+
 
                  
         
-                    <div class="btn-group btn-group-sm">
-                      <a class="btn btn-info" [routerLink]="['/contact/organisation/',doc._id]"><i class="fas fa-eye"></i></a>
-                      <a  class="btn btn-dark" [routerLink]="['/contact/sendmailer']"><i class="fas fa-envelope"  style="color: red;"></i></a>
-                      <a  class="btn btn-danger"><i class="fas fa-trash"></i></a>
-                      <a  class="btn btn-secondary"><i class="fas fa-edit"></i></a>
-                       </div>
-                  
+                      <a  [routerLink]="['/contact/organisation/',doc._id]"><i class="fas fa-eye" style="color: #f012be;font-size: large;"></i></a>&nbsp;
+                      <a  [routerLink]="['/contact/sendmailer']"><i class="fas fa-envelope" style="color: #007bff;font-size: large;"></i></a>&nbsp;
+                      <a (click)="delete(doc._id)"><i  style="color: red;font-size: large;" class="fas fa-trash"></i>{{doc._id}}</a>&nbsp;
+                      <a  [routerLink]="['/contact/organisation/'+ doc._id +'/update']"><i style="color: #28a745;font-size: large;" class="fas fa-edit"></i></a>&nbsp;
+                    
+                  <!-- -->
                 </td>
-              </tr>
+              </tr> 
              
             </tbody>
-           
+          
           </table>
         
         </div>

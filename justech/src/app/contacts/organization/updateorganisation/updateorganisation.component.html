@@ -1,0 +1,178 @@
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 *ngIf="organisation">Mise A jour {{organisation.name}}</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a  [routerLink]="['/contact/home']" >contact</a></li>
+            <li class="breadcrumb-item active">ajouter organisation</li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <section class="content" *ngIf="organisation">
+    <div class="container-fluid">
+<div class="card" style="padding: 30px;">
+        <form [formGroup]="updateorg" (ngSubmit)="onupdate()" >
+
+          <div class="row">
+
+            <div class="col-md-6" >
+
+              <div class="form-group">
+                <label >Nom organisation <span style="color: red;"> *</span></label>
+                <input  formControlName="name" class="form-control"  >
+                
+                
+              
+              </div>
+
+              <div class="form-group">
+                <label > abréviation  </label>
+                <input    class="form-control"  formControlName="abreviation">
+              </div>
+              <hr>
+              <div class="form-group">
+                <label >Description </label>
+                <textarea     class="form-control"  rows="1" formControlName="description"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label >Email <span style="color: red;"> *</span></label>
+                <input type="email"class="form-control"  formControlName="email" >
+               
+              </div>
+
+              
+              <hr>
+
+            
+              
+               
+               <div class="form-group">
+                    <label >Domaine de service  <span style="color: red;"> *</span></label>
+                    <select   formControlName="domaine"    class="form-control " >
+                    <option selected="">selectioner un domaine d'organisation</option>
+                    <option *ngFor="let domaine of all_service" [ngValue]="domaine.name">{{domaine.name}}</option>     
+                     </select>
+                  
+                 </div>
+                 <div class="form-group">
+                <label > Type  <span style="color: red;"> *</span></label>
+                      <select    formControlName="type"  class="form-control " >
+                      <option >selectioner un type d'organisation</option>
+                      <option *ngFor="let type of all_type" >{{type.name}}</option>  
+                        
+                </select>
+                
+               </div>
+                
+                
+            </div>
+
+            <div class="col-md-6">
+
+            
+              <div class="form-group">
+                <label>Pays </label>
+                <select  class="form-control"  >
+                  
+                  <option *ngFor="let pays of all_pays" ngValue={{pays}}  >{{pays}}</option>
+                </select>
+               
+              </div>
+           
+              <div class="form-group">
+                <label >Ville </label>
+                
+                <input type="text"   formControlName="ville"   class="form-control"  >
+              </div>
+              <hr>
+              <div class="form-group">
+                <label >Logo<span style="font-weight: 100; color:dimgray">(png/jpg/jpeg<span style="color: red;">**</span>)</span></label>
+                <div class="input-group">
+                  <div class="custom-file">
+                    <input type="file"  class="custom-file-input"  accept="image/png, image/jpeg, image/jpg"  >
+                    <label class="custom-file-label"  ></label>
+                  </div>
+                  
+                </div>
+              </div> 
+            
+              <div class="form-group">
+                <label >Fax </label>
+                <input type="number" min="5"  formControlName="fax"  class="form-control"  >
+              </div>
+              
+
+              
+               
+                  
+                 <hr>
+                 <div class="form-group" > 
+                  <label >Liste Tel: </label>
+                    <div class="input-group">
+                     
+                      <div class="input-group-prepend" style="background-color: #17a2b8;">
+                        <span class="input-group-text" >
+                          <i class="fas fa-list"></i>
+                        </span>
+                      </div>
+                     
+                      <input  name="number"  type="text" value={{listtel}}  class="form-control">
+                    </div>  
+                     
+                </div>
+                
+  
+             <div class="row">
+               <div class="col-md-11">
+              <div class="form-group">
+                <label >Tel </label>
+                  <div class="input-group">
+                   
+                    <div class="input-group-prepend" style="background-color: #17a2b8;">
+                      <span class="input-group-text" >
+                        <i class="fas fa-phone"></i>
+                      </span>
+                    </div>
+                    <input type="number" min="5" (change)="getphone($event.target.value)"  placeholder="(+xxx) xx xxx xxx" class="form-control">
+                  </div>  
+                   
+              </div>
+
+            </div>
+            <div class="col-md-1">
+              <label for=""> &nbsp;&nbsp;</label>
+              <div class="form-group">
+               
+              <button class="btn btn-info" type="button"  ><i class="fas fa-plus-square"></i></button>
+            </div>
+            </div>
+            </div>
+     
+
+             
+
+              
+            </div>
+          
+          </div>
+          <div class="card-footer " >
+            <button  class="btn btn-danger float-right"  type="reset">  Annuler</button>
+             <button type="submit" class="btn btn-primary float-right" style="margin-right: 2px;" type="submit"  [disabled]="updateorg.invalid" >
+              <i  class="fa fa-circle-o-notch fa-spin" style="position: relative;bottom: 1px;margin-right:5px;"  *ngIf="loading"></i> 
+              Mise A jour </button>
+              
+          </div>
+        </form>
+
+</div>
+        
+    </div>
+    
+  </section>

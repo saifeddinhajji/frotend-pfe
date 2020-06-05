@@ -15,8 +15,31 @@
   </section>
   
   <section class="content">
+    <div class="card" style="padding: 30px;">
     <div class="container-fluid">
-<div class="card" style="padding: 30px;">
+     
+    
+      <label class="text-center">Organisations <span style="color: red;"> *</span></label>
+      <ng-select  bindLabel="name"
+            placeholder="selectionner des organisations"
+            appendTo="body"
+            multiple="true"
+            [searchable]="true"
+            maxSelectedItems="3"
+            disabled="false" 
+            
+           
+            [clearable]="true"
+            [(ngModel)]="selected">
+            <ng-option [value]="item._id" [disabled]="item.disabled" *ngFor="let item of items">
+              <img src="{{item.logo.url}}"  width="20px" height="20px" *ngIf="item.logo"/>
+                {{item.name}}<span style="color: blueviolet;" *ngIf="item.abreviation">({{item.abreviation}})</span>
+            </ng-option>
+          </ng-select>
+         
+          
+    
+    <hr color="#0A0A09">
         <form [formGroup]="formationform" (ngSubmit)="onSubmit()">
 
           <div class="row">
@@ -24,99 +47,117 @@
             <div class="col-md-6">
 
               <div class="form-group">
-                <label >Titre de formation :</label>
+                <label >Titre de formation <span style="color: red;">*</span></label>
                 <input formControlName="titre" class="form-control" placeholder="titre" >
+               <!-- <span *ngIf="titre.invalid && titre.errors.required  && (titre.dirty || titre.touched)" [ngClass] = "'error'">
+                  titre de formation  est obligatoire.
+                </span>
+                -->
               </div>
               
               <div class="form-group">
-                <label >Description :</label>
+                <label >Description</label>
                 <textarea  formControlName="description"  class="form-control" rows="1" placeholder="description"></textarea>
               </div>
 <hr>
-              <div class="form-group">
-                <label f>Modèle certificat :</label>
-                <input  formControlName="modele_certificat" class="form-control"  placeholder="modele certificat">
-          
-              </div>
+       
 
-              <div class="form-group">
-                <label>Support :</label>
-                <input type="text" formControlName="support"class="form-control" placeholder="support" >
-              </div>
-              <hr>
+<div class="form-group">
+  <label f>Modèle certificat<span style="font-weight: 100; color:dimgray">(pptx<span style="color: red;">**</span>)</span></label>
+  <div class="input-group">
+    <div class="custom-file">
+      <input type="file"  class="custom-file-input" name="pptx"  accept=".ppt, .pptx"  (change)="selectfile($event.target,$event.target.files)">
+      <label class="custom-file-label"  >{{defaultvalue1}}</label>
+    </div>
+    
+  </div>
+</div> 
+<hr>
+<div class="form-group">
+  <label>Support<span style="font-weight: 100; color:dimgray">(csv<span style="color: red;">**</span>)</span></label>
+  <div class="input-group">
+    <div class="custom-file">
+      <input type="file"  class="custom-file-input"    name="csv" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"  (change)="selectfile($event.target,$event.target.files)">
+      <label class="custom-file-label"  >{{defaultvalue2}}</label>
+    </div>
+    
+  </div>
+</div> 
+<div class="form-group">
+  <label >Afficher<span style="font-weight: 100; color:dimgray">(png/jpg/jpeg<span style="color: red;">**</span>)</span></label>
+  <div class="input-group">
+    <div class="custom-file">
+      <input type="file" name="image" class="custom-file-input" accept="image/png, image/jpeg, image/jpg"  (change)="selectfile($event.target,$event.target.files)">
+      <label class="custom-file-label"  >{{defaultvalue3}}</label>
+    </div>
+    
+  </div>
+</div> 
+            
 
-              <div class="form-group">
-                <label >Formateur  :</label>
-                      <select    class=" custom-select" formContorlName="formateur" >
-                      <option selected disabled>selectioner un formateur</option>
-                     <option value="1">formateur 1</option>
-                     <option value="2">formateur 2</option>
-                     <option value="3">formateur 3</option>
-                </select>
-                
-               </div>
+             
+            
+
+           
                
-               <div class="form-group">
-                <label >Organisateur  :</label>
-                      <select class="form-control custom-select" formControlName="organisateur">
-                      <option selected="" disabled="">selectioner un organisation</option>
-                      <option  *ngFor="let item of items; let i = index" value={{item._id}}>
-                       
-                        {{item.name}}({{item.abreviation}})</option>
-                     
-                     
-                </select>
-  
-               </div>
-
+               
             </div>
 
             <div class="col-md-6">
 
              
-              
+              <div class="form-group">
+                <label >Formateur  </label>
+                      <select    class=" custom-select" formControlName="formateur" >
+                      <option >selectioner un formateur</option>
+                    <option value="formateur 1">formateur 1</option>
+                    <option value="formateur 2">formateur 2</option>
+                    <option value="formateur 3">formateur 3</option>
+                </select>
+                
+              </div>
             
              
               <div class="form-group">
                <label >
-                Date  Depart  :
+                Date Depart <span style="color: red;"> *</span>
                </label>
-               <input type="datetime-local" formControlName="date_depart" class="form-control" >
+               <input type="datetime-local" formControlName="date_depart"  min="2020-04-29" class="form-control" >
+               <!-- <span *ngIf="date_depart.invalid && date_depart.errors.required  && (date_depart.dirty || date_depart.touched)" [ngClass] = "'error'">
+                date depart est obligatoire.
+              </span>-->
               </div>
+              <hr>
               <div class="form-group">
                 <label >
-                 Date  Fin   :
+                 Date Fin <span style="color: red;">*</span>
                 </label>
                 <input type="datetime-local"   formControlName="date_fin" class="form-control"  >
+              <!--  <span *ngIf="date_fin.invalid && date_fin.errors.required  && (date_fin.dirty || date_fin.touched)" [ngClass] = "'error'">
+                  date fin  est obligatoire.
+                </span>
+                -->
               </div>
 
               
 
               <hr>
               <div class="form-group">
-                <label >Pays :</label>
-                <input type="text" formControlName="pays" class="form-control"  placeholder="pays">
+                <label>Pays </label>
+                <select formControlName="pays" class="form-control select">
+                  <option selected="">choisir un pays</option>
+                  <option *ngFor="let pays of all_pays">{{pays}}</option>
+                </select>
+               
               </div>
              
               <div class="form-group">
-                <label >Ville :</label>
+                <label >Ville </label>
                 <input type="text" class="form-control" formControlName="ville" placeholder="ville">
               </div>
               <hr>
               
 
-              <div class="form-group">
-                <label >Afficher</label>
-                <div class="input-group">
-                  <div class="custom-file">
-                    <input type="file"  class="custom-file-input"   (change)="selectImage($event.target.files)">
-                    <label class="custom-file-label"  >choisir un Affiche</label>
-                  </div>
-                  <div class="input-group-append">
-                    <span class="input-group-text"  (click)="sendfiletoserveur()" >telecharger</span>
-                  </div>
-                </div>
-              </div>
 
             </div>
 
@@ -124,7 +165,7 @@
           <div class="card-footer " >
             <button  class="btn btn-danger float-right" (click)="revert()" type="reset">  Annuler</button>
            
-             <button type="submit" class="btn btn-primary float-right"   style="margin-right: 2px;" type="submit" [disabled]="formationform.invalid">
+             <button type="submit" class="btn btn-primary float-right"   style="margin-right: 2px;" type="submit" [disabled]="formationform.invalid ||  selected.length<=0">
               <i *ngIf="loading" class="fa fa-circle-o-notch fa-spin" style="position: relative;bottom: 1px;margin-right:5px;"></i> 
               Ajouter</button>
               
@@ -132,7 +173,7 @@
         </form>
 
 </div>
-<p>Form value: {{ formationform.value | json }}</p>
-<p>Form status: {{ formationform.status | json }}</p>  
+
+
     </div>
   </section>

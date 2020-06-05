@@ -8,10 +8,10 @@ import { map } from 'rxjs/operators';
 })
 export class FormationService {
   org:any;
-  readonly  basUrl='http://localhost:5000/formation';
+  readonly  basUrl='http://localhost:5000';
   constructor(private http: HttpClient) { }
   add(data:any) {
-    return this.http.post<any>(this.basUrl+`/create/`+data.organisateur, data)
+    return this.http.post<any>(this.basUrl+`/formation/create/`+data.organisateur, data)
         .pipe(map(org => {
             
             if (org) {
@@ -22,6 +22,7 @@ export class FormationService {
         }));
   }
   all(page:number) {
-    return this.http.get(this.basUrl+`/all?page=${page}`);
+    return this.http.get(this.basUrl+`/formation/all?page=${page}`);
   }
+ 
 }

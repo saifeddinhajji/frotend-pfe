@@ -24,25 +24,30 @@
             <div class="col-md-6">
 
               <div class="form-group">
-                <label >Nom organisation :</label>
-                <input  formControlName="name" class="form-control" placeholder="nom d'organisation">
+                <label >Nom organisation <span style="color: red;"> *</span></label>
+                <input  formControlName="name" class="form-control" placeholder="nom d'organisation" >
+                <!--<span *ngIf="name.invalid && name.errors.required  && (name.dirty || name.touched)" [ngClass] = "'error'">
+                  Nom d'organisation  est obligatoire.
+                </span>-->
+
+                
+              
               </div>
-             
+
               <div class="form-group">
-                <label > abréviation  :</label>
+                <label > abréviation  </label>
                 <input  formControlName="abreviation"   class="form-control" placeholder="abreviation" >
               </div>
+              <hr>
               <div class="form-group">
-                <label >Description :</label>
+                <label >Description </label>
                 <textarea  formControlName="description"   class="form-control"  rows="1" placeholder="description"></textarea>
               </div>
 
               <div class="form-group">
-                <label >Email :</label>
+                <label >Email <span style="color: red;"> *</span></label>
                 <input type="email" formControlName="email" class="form-control"  placeholder=" email">
-                <!--<span *ngIf="email.invalid && email.errors.required  && (email.dirty || email.touched)" class="error">
-                  Ce champ est obligatoire.
-                </span>
+                <!--
               -->
               </div>
 
@@ -62,26 +67,28 @@
                 
                </div>
                --> 
-               <div class="form-group">
-                <label for="inputStatus"> Type  :</label>
-                      <select    formControlName="type" (change)="changetype($event)" class="form-control custom-select" >
-                      <option selected="" disabled="" >selectioner un domaine d'organisation</option>
-                      <option  value="client">client</option> 
-                      <option  value="fournisseur">fournisseur</option> 
-                      <option  value="partenaire">partenaire</option>     
-                </select>
-                
-               </div>
-               <!------------------------------------------->
+
+                <!------------------------------------------->
                
+                <div class="form-group">
+                  <label >Domaine de service  <span style="color: red;"> *</span></label>
+                        <select    formControlName="domaine"   class="form-control " >
+                        <option selected="">selectioner un domaine d'organisation</option>
+                        <option *ngFor="let domaine of all_service" [ngValue]="domaine.name">{{domaine.name}}</option>     
+                  </select>
+                  
+                 </div>
+                   <!------------------------------------------->
                <div class="form-group">
-                <label for="inputStatus">Domaine de service  :</label>
-                      <select    formControlName="domaine" (change)="changedomaine($event)"  class="form-control custom-select" >
-                      <option selected="" disabled="" >selectioner un domaine d'organisation</option>
-                      <option *ngFor="let domaine of Domaine" [ngValue]="domaine">{{domaine}}</option>     
+                <label > Type  <span style="color: red;"> *</span></label>
+                      <select    formControlName="type" (change)="changetype($event)" class="form-control " >
+                      <option selected="" disabled="" >selectioner un type d'organisation</option>
+                      <option *ngFor="let type of all_type" [ngValue]="type.name">{{type.name}}</option>  
+                        
                 </select>
                 
                </div>
+              
                
               
 
@@ -92,53 +99,87 @@
             <div class="col-md-6">
 
             
-          
-              
-            
               <div class="form-group">
-                <label for="domaine">Tel :</label>
-                <input type="number" min="5" formControlName="tel1" class="form-control" placeholder="(+xxx) xx xxx xxx" >
-               <!-- <span *ngIf="tel1.invalid && tel1.errors.required  && (tel1.dirty || tel1.touched)" class="error">
-                  Ce champ est obligatoire
-              </span>
-              <span *ngIf="tel1.invalid && tel1.errors.invalidNumber && (tel1.dirty || tel1.touched)">
-                Ce champ est obligatoirer.
-              </span>
-              -->
+                <label>Pays </label>
+                <select formControlName="pays" class="form-control"  >
+                  
+                  <option *ngFor="let pays of all_pays" ngValue={{pays}}  >{{pays}}</option>
+                </select>
+               
               </div>
-
+           
               <div class="form-group">
-                <label >Tel :</label>
-                <input type="number" min="5" formControlName="tel2"  placeholder="(+xxx) xx xxx xxx"  class="form-control" >
-              </div>
-
-              <div class="form-group">
-                <label >Fax :</label>
-                <input type="number" min="5" formControlName="fax"  placeholder=" xx xxx xxx" class="form-control"  >
-              </div>
-
-             
-              <div class="form-group">
-                <label>Pays :</label>
-                <input type="text"  formControlName="pays"  placeholder="pays"  class="form-control"  >
+                <label >Ville </label>
+                
+                <input type="text"  formControlName="ville"  placeholder="ville"  class="form-control"  >
               </div>
               <hr>
               <div class="form-group">
-                <label >Ville :</label>
-                <input type="text"  formControlName="ville"  placeholder="ville"  class="form-control"  >
-              </div>
-              <div class="form-group">
-                <label >Logo</label>
+                <label >Logo<span style="font-weight: 100; color:dimgray">(png/jpg/jpeg<span style="color: red;">**</span>)</span></label>
                 <div class="input-group">
                   <div class="custom-file">
-                    <input type="file"  class="custom-file-input"   (change)="selectImage($event.target.files)">
-                    <label class="custom-file-label"  >choisir un logo</label>
+                    <input type="file"  class="custom-file-input"  accept="image/png, image/jpeg, image/jpg"  (change)="selectImage($event.target.files)">
+                    <label class="custom-file-label"  >{{defaultvalue}}</label>
                   </div>
-                  <div class="input-group-append">
-                    <span class="input-group-text"  (click)="sendfiletoserveur()" >telecharger</span>
-                  </div>
+                  
                 </div>
+              </div> 
+            
+              <div class="form-group">
+                <label >Fax </label>
+                <input type="number" min="5" formControlName="fax"  placeholder=" xx xxx xxx" class="form-control"  >
               </div>
+              
+
+              
+               
+                  
+                 <hr>
+                 <div class="form-group" *ngIf="inputphone"> 
+                  <label >Liste Tel: </label>
+                    <div class="input-group">
+                     
+                      <div class="input-group-prepend" style="background-color: #17a2b8;">
+                        <span class="input-group-text" >
+                          <i class="fas fa-list"></i>
+                        </span>
+                      </div>
+                      <input  name="number"  type="tel"   value={{listtel}} class="form-control">
+                    </div>  
+                     
+                </div>
+                
+  
+             <div class="row">
+               <div class="col-md-11">
+              <div class="form-group">
+                <label >Tel </label>
+                  <div class="input-group">
+                   
+                    <div class="input-group-prepend" style="background-color: #17a2b8;">
+                      <span class="input-group-text" >
+                        <i class="fas fa-phone"></i>
+                      </span>
+                    </div>
+                    <input type="number" min="5" name="telphone"  (change)="getphone($event.target.value)" placeholder="(+xxx) xx xxx xxx" class="form-control">
+                  </div>  
+                   
+              </div>
+
+            </div>
+            <div class="col-md-1">
+              <label for=""> &nbsp;&nbsp;</label>
+              <div class="form-group">
+               
+              <button class="btn btn-info" type="button" (click)="getphone($event.target.value);false" ><i class="fas fa-plus-square"></i></button>
+            </div>
+            </div>
+            </div>
+     
+
+             
+
+              
             </div>
           
           </div>
@@ -156,5 +197,5 @@
     </div>
     
   </section>
-<p>Form value: {{ orgform.value | json }}</p>
-         <!--<p>Form status: {{ orgform.status | json }}</p>-->
+
+   {{orgform.value|json}}
